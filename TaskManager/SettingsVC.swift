@@ -25,18 +25,6 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         TableView.delegate = self
         TableView.dataSource = self
 
-        // Do any additional setup after loading the view, typically from a nib.
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-        layout.itemSize = CGSize(width: 25, height: 25)
-        
-        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 25), collectionViewLayout: layout)
-        collectionViewAlert.dataSource = self
-        collectionViewAlert.delegate = self
-        collectionViewAlert.reloadData()
-        collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
-        collectionViewAlert.backgroundColor = UIColor.white
-//        self.view.addSubview(collectionViewAlert)
         // Do any additional setup after loading the view.
     }
 
@@ -87,10 +75,26 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let alertView = SCLAlertView()
         alertView.addTextField("Enter category name")
 
+        // Do any additional setup after loading the view, typically from a nib.
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.itemSize = CGSize(width: 25, height: 25)
+        
+        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 25), collectionViewLayout: layout)
+        collectionViewAlert.dataSource = self
+        collectionViewAlert.delegate = self
+        collectionViewAlert.restorationIdentifier = "AlertCollectionView"
+        collectionViewAlert.isUserInteractionEnabled = true
+        collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
+        collectionViewAlert.backgroundColor = UIColor.white
+        
         let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:70))
         subview.addSubview(self.collectionViewAlert)
+        subview.isUserInteractionEnabled = true
+        
         alertView.customSubview = subview
         alertView.showEdit("Choose color", subTitle: "This alert view has buttons")
+        
 //        alert.view.addSubview(self.collectionViewAlert)
 
         
@@ -188,7 +192,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // get a reference to our storyboard cell
-        if (collectionView == self.collectionViewAlert) {
+        if (collectionView.restorationIdentifier == "AlertCollectionView") {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollCell", for: indexPath as IndexPath)
             cell.backgroundColor = self.colors[indexPath.item]
             return cell
