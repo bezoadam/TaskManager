@@ -221,6 +221,9 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JMO-4G-VK2"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="SRo-cF-TzL"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="TableView" destination="dEb-c4-47D" id="Cia-ds-P7S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXK-sh-ILC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

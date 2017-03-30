@@ -8,17 +8,38 @@
 
 import UIKit
 
-class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    @IBOutlet weak var TableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        TableView.delegate = self
+        TableView.dataSource = self
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    var categories = CategoryObject()
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.category_names.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
+        let row = indexPath.row
+        cell.textLabel?.text = categories.category_names[row]
+        cell.backgroundColor = categories.category_color[row].withAlphaComponent(0.2)
+        cell.isUserInteractionEnabled = false
+
+        return cell
     }
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
