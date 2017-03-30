@@ -33,6 +33,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 25), collectionViewLayout: layout)
         collectionViewAlert.dataSource = self
         collectionViewAlert.delegate = self
+        collectionViewAlert.reloadData()
         collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
         collectionViewAlert.backgroundColor = UIColor.white
 //        self.view.addSubview(collectionViewAlert)

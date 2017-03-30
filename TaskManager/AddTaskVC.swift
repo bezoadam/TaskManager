@@ -10,6 +10,9 @@ import UIKit
 
 class AddTaskVC: UIViewController {
 
+    @IBOutlet weak var cancelBar: UIBarButtonItem!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -113,11 +113,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="Aoa-lN-JFC">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xSt-f7-jDH"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xSt-f7-jDH">
+                            <connections>
+                                <segue destination="kEf-Sl-1sv" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="rcw-mH-AJD"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="dWO-Wh-2Ex"/>
+                        <connections>
+                            <outlet property="titleView" destination="bKh-Kh-aLv" id="TJP-zj-ajI"/>
+                        </connections>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cancelBar" destination="xSt-f7-jDH" id="XLe-fq-jpP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZo-Tg-tFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="kEf-Sl-1sv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2780" y="-242.42878560719643"/>
         </scene>
@@ -239,7 +250,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="T6j-HW-hIH">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JMO-4G-VK2"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JMO-4G-VK2">
+                            <connections>
+                                <segue destination="gEQ-9z-UC6" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="LPX-i4-DiA"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="SRo-cF-TzL"/>
                     </navigationItem>
                     <connections>
@@ -247,6 +262,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXK-sh-ILC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gEQ-9z-UC6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2780" y="472.71364317841085"/>
         </scene>
