@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SCLAlertView
 
 class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,12 +17,25 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     @IBOutlet weak var TableView: UITableView!
     
     var categories: [NSManagedObject] = []
+    var collectionViewAlert: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         TableView.delegate = self
         TableView.dataSource = self
+
+        // Do any additional setup after loading the view, typically from a nib.
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.itemSize = CGSize(width: 25, height: 25)
+        
+        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 25), collectionViewLayout: layout)
+        collectionViewAlert.dataSource = self
+        collectionViewAlert.delegate = self
+        collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
+        collectionViewAlert.backgroundColor = UIColor.white
+//        self.view.addSubview(collectionViewAlert)
         // Do any additional setup after loading the view.
     }
 
@@ -69,33 +83,42 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     @IBAction func addCategory(_ sender: Any) {
+        let alertView = SCLAlertView()
+        alertView.addTextField("Enter category name")
+
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:70))
+        subview.addSubview(self.collectionViewAlert)
+        alertView.customSubview = subview
+        alertView.showEdit("Choose color", subTitle: "This alert view has buttons")
+//        alert.view.addSubview(self.collectionViewAlert)
+
         
-        let alert = UIAlertController(title: "New catogory",
-                                      message: "Add a new category name",
-                                      preferredStyle: .alert)
+//        let alert2 = UIAlertController(title: "New category",
+//                                      message: "Add a new category name",
+//                                      preferredStyle: .alert)
+//        
+//        let saveAction = UIAlertAction(title: "Save", style: .default) {
+//            [unowned self] action in
+//            
+//            guard let textField = alert.textFields?.first,
+//                let categoryToSave =  textField.text else {
+//                    return
+//            }
+//            
+//            self.save(name: categoryToSave)
+//            self.TableView.reloadData()
+//        }
+//        
+//        let cancelAction = UIAlertAction(title: "Cancel",
+//                                         style: .default)
+//        
+//        alert.addTextField()
+//        
+//        alert.addAction(saveAction)
+//        alert.addAction(cancelAction)
         
-        let saveAction = UIAlertAction(title: "Save", style: .default) {
-            [unowned self] action in
-            
-            guard let textField = alert.textFields?.first,
-                let categoryToSave =  textField.text else {
-                    return
-            }
-            
-            self.save(name: categoryToSave)
-            self.TableView.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default)
-        
-        alert.addTextField()
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-        
+//        present(alert, animated: true)
+
 
     }
 
@@ -150,7 +173,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         }
         
     }
-    
+
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var colors = [UIColor.red, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.cyan]
     // MARK: - UICollectionViewDataSource protocol
@@ -164,11 +187,18 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // get a reference to our storyboard cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath)
+        if (collectionView == self.collectionViewAlert) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollCell", for: indexPath as IndexPath)
+            cell.backgroundColor = self.colors[indexPath.item]
+            return cell
+        }
+        else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath)
+            
+            cell.backgroundColor = self.colors[indexPath.item]// make cell more visible in our example project
+            return cell
+        }
         
-        cell.backgroundColor = self.colors[indexPath.item]// make cell more visible in our example project
-        
-        return cell
     }
     
     // MARK: - UICollectionViewDelegate protocol
