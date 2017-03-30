@@ -17,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //biely bar s baterkou atd
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
+        let cyan_color: UIColor = UIColor(red: CGFloat(0/255.0), green: CGFloat(204/255.0), blue: CGFloat(204/255.0), alpha: CGFloat(1.0))
+        //let blue_color: UIColor = UIColor(red: CGFloat(0/255.0), green: CGFloat(0/255.0), blue: CGFloat(204/255.0), alpha: CGFloat(1.0))
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.white
+        navigationBarAppearace.barTintColor = cyan_color
+        
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!, NSForegroundColorAttributeName: UIColor.white]
+        
         return true
     }
 
