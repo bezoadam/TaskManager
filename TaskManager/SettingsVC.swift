@@ -28,14 +28,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = getContext()
         
         //2
         let fetchRequest =
@@ -53,7 +46,11 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    func getContext () -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.categories.count
@@ -102,16 +99,13 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
 
     }
 
+    @IBAction func deleteAll(_ sender: Any) {
+        deleteRecords()
+    }
+    
     func save(name: String) {
         
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        // 1
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = getContext()
         
         // 2
         let entity =
@@ -132,6 +126,29 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+    }
+
+    func deleteRecords() -> Void {
+        let moc = getContext()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Categories")
+        
+        let result = try? moc.fetch(fetchRequest)
+        let resultData = result as! [Categories]
+        
+        for object in resultData {
+            moc.delete(object)
+        }
+        
+        do {
+            try moc.save()
+            print("saved!")
+            TableView.reloadData()
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        } catch {
+            
+        }
+        
     }
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
