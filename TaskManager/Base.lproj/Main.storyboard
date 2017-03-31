@@ -279,10 +279,14 @@
                     <navigationItem key="navigationItem" title="Settings" id="T6j-HW-hIH">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JMO-4G-VK2">
                             <connections>
-                                <segue destination="gEQ-9z-UC6" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="LPX-i4-DiA"/>
+                                <segue destination="gEQ-9z-UC6" kind="unwind" identifier="cancel" unwindAction="unwindToMainVCWithSegue:" id="LPX-i4-DiA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SRo-cF-TzL"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SRo-cF-TzL">
+                            <connections>
+                                <segue destination="gEQ-9z-UC6" kind="unwind" identifier="save" unwindAction="unwindToMainVCWithSegue:" id="dtN-s2-O9Q"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="TableView" destination="dEb-c4-47D" id="Cia-ds-P7S"/>

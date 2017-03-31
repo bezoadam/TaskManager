@@ -97,14 +97,13 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         subview.isUserInteractionEnabled = true
         
         alertView.customSubview = subview
-        alertView.addButton("Close", target: self, selector: #selector(AlertViewClosePressed))
-        alertView.addButton("Save", target: self, selector: #selector(AlertViewSavePressed))
+        alertView.addButton("Close", target: self, selector: #selector(chooseColorClosePressed))
         alertView.showEdit("Choose new color", subTitle: "This alert view has buttons")
         
     }
-    
-    func AlertViewSavePressed(_ sender:UIButton) {
-        update(index: self.selectedCategoryRow, color: self.newTaskColor)
+
+    func chooseColorClosePressed(_ sender:UIButton) {
+        TableView.reloadData()
     }
     
     @IBAction func addCategory(_ sender: Any) {
@@ -215,6 +214,18 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier != "save") {
+            print("cancel")
+            return
+        }
+        else {
+            if let _  = self.newTaskColor {
+                 update(index: self.selectedCategoryRow, color: self.newTaskColor)
+            }
+        }
+    }
+    
     var colors = [UIColor.red, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.cyan]
     
     // MARK: - UICollectionViewDataSource protocol
@@ -223,12 +234,20 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollCell", for: indexPath as IndexPath)
-        
-        cell.backgroundColor = self.colors[indexPath.item]
+        if (collectionView.restorationIdentifier == "AlertCollectionView") {
+            cell.backgroundColor = self.colors[indexPath.item].withAlphaComponent(0.2)
+        }
+        else if (collectionView.restorationIdentifier == "EditColorCollectionView") {
+            let color_tmp = self.colors[indexPath.item]
+            let categoryColor_tmp = self.categories[self.selectedCategoryRow].value(forKey: "color") as? UIColor
+            if color_tmp == categoryColor_tmp {
+                cell.layer.borderColor = UIColor.black.cgColor
+                cell.layer.borderWidth = 2.0
+            }
+            cell.backgroundColor = color_tmp.withAlphaComponent(0.2)
+        }
         return cell
-
     }
     
     // MARK: - UICollectionViewDelegate protocol
