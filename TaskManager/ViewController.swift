@@ -11,6 +11,7 @@ import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
     var newTaskToAdd: NewTask?
     var tasks: [NSManagedObject] = []
     
@@ -26,8 +27,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //nacitanie ulozenych kategorii
+        getData()
+    }
+    
+    func getData() {
+        //nacitanie ulozenych taskov
         let managedContext = getContext()
         
         let fetchRequest =
@@ -47,7 +51,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
         if let _ = self.newTaskToAdd {
-            
+            getData()
+            tableView.reloadData()
         }
     }
 

@@ -22,6 +22,7 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     var categories: [NSManagedObject] = []
     var selectedCategory: NSManagedObject!
     let datePicker = UIDatePicker()
+    var endDate: Date!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,12 +70,38 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     
     func donePressed() {
         
+        self.endDate = datePicker.date
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         endDateField.text = dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
+
+    func save(name: String, isFinished: Bool, category: NSManagedObject, endDate: Date) {
+        
+        let managedContext = getContext()
+        
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Tasks",
+                                       in: managedContext)!
+        
+        let task = NSManagedObject(entity: entity,
+                                       insertInto: managedContext)
+        
+        task.setValue(name, forKeyPath: "name")
+        task.setValue(isFinished, forKey: "isFinished")
+        task.setValue(endDate, forKey: "endDate")
+        task.setValue(category, forKey: "category")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier != "unwindToMainVCSave") {
@@ -82,10 +109,14 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
             return
         }
         if ((self.taskNameField.text?.characters.count)! > 0) {
+            
+            save(name: self.taskNameField.text!, isFinished: false, category: self.selectedCategory, endDate: self.endDate)
+            
             let newTasktoAdd = NewTask()
             newTasktoAdd.taskName = self.taskNameField.text!
             newTasktoAdd.isFinished = false
             newTasktoAdd.category = self.selectedCategory
+            newTasktoAdd.endDate = self.endDate
             let destinationVC = segue.destination as! ViewController
             destinationVC.newTaskToAdd = newTasktoAdd
         }
