@@ -26,19 +26,17 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         TableView.delegate = self
         TableView.dataSource = self
 
-        // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //nacitanie ulozenych kategorii
         let managedContext = getContext()
-        
-        //2
+
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "Categories")
-        
-        //3
+
         do {
             categories = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
@@ -67,6 +65,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
                                           for: indexPath)
         cell.textLabel?.text = name.value(forKeyPath: "name") as? String
         cell.textLabel?.backgroundColor = UIColor.clear
+        cell.selectionStyle = .none
         let bgColor = name.value(forKey: "color") as? UIColor
         cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
         cell.isUserInteractionEnabled = true
@@ -79,7 +78,6 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         self.selectedCategoryRow = indexPath.row
         let alertView = SCLAlertView()
         
-        // Do any additional setup after loading the view, typically from a nib.
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         layout.itemSize = CGSize(width: 25, height: 25)
@@ -111,9 +109,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     
     @IBAction func addCategory(_ sender: Any) {
         let alertView = SCLAlertView()
-        
 
-        // Do any additional setup after loading the view, typically from a nib.
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         layout.itemSize = CGSize(width: 25, height: 25)
@@ -127,7 +123,6 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
         collectionViewAlert.backgroundColor = UIColor.white
         
-        // Add textfield 1
         let textfield = UITextField(frame: CGRect(x: 7, y: 50, width: 202, height: 27))
         textfield.layer.borderColor = UIColor.black.cgColor
         textfield.layer.borderWidth = 1.0
@@ -169,8 +164,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     func save(name: String, color: UIColor) {
         
         let managedContext = getContext()
-        
-        // 2
+
         let entity =
             NSEntityDescription.entity(forEntityName: "Categories",
                                        in: managedContext)!
@@ -178,11 +172,9 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let category = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
         
-        // 3
         category.setValue(name, forKeyPath: "name")
         category.setValue(color, forKey: "color")
         
-        // 4
         do {
             try managedContext.save()
             categories.append(category)
@@ -199,6 +191,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         TableView.reloadData()
     }
     
+    //Pomocna metoda na odstranenie vsetkych kategorii
     func deleteRecords() -> Void {
         let moc = getContext()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Categories")
@@ -222,16 +215,13 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         
     }
 
-    let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var colors = [UIColor.red, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.cyan]
-    // MARK: - UICollectionViewDataSource protocol
     
-    // tell the collection view how many cells to make
+    // MARK: - UICollectionViewDataSource protocol
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.colors.count
     }
     
-    // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollCell", for: indexPath as IndexPath)
@@ -242,7 +232,6 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     // MARK: - UICollectionViewDelegate protocol
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         let cell = collectionView.cellForItem(at: indexPath)
@@ -262,7 +251,5 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.layer.borderWidth = 0.0
     }
-    // MARK: - UICollectionViewDataSource protocol
-    
 
 }
