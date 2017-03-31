@@ -34,7 +34,7 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -108,7 +108,8 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
             print("cancel")
             return
         }
-        if ((self.taskNameField.text?.characters.count)! > 0) {
+        if ((self.taskNameField.text?.characters.count)! > 0 &&
+            (self.endDateField.text?.characters.count)! > 0) {
             
             save(name: self.taskNameField.text!, isFinished: false, category: self.selectedCategory, endDate: self.endDate)
             

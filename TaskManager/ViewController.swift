@@ -68,7 +68,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.dequeueReusableCell(withIdentifier: "TableCell",
                                           for: indexPath)
         cell.textLabel?.text = name.value(forKeyPath: "name") as? String
+        cell.textLabel?.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
+        let category = name.value(forKey: "category") as? NSManagedObject
+        let bgColor = category?.value(forKey: "color") as? UIColor
+        cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
         cell.isUserInteractionEnabled = true
         
         return cell
