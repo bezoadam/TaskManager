@@ -84,7 +84,7 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         if ((self.taskNameField.text?.characters.count)! > 0) {
             let newTasktoAdd = NewTask()
             newTasktoAdd.taskName = self.taskNameField.text!
-            newTasktoAdd.finished = false
+            newTasktoAdd.isFinished = false
             newTasktoAdd.category = self.selectedCategory
             let destinationVC = segue.destination as! ViewController
             destinationVC.newTaskToAdd = newTasktoAdd
