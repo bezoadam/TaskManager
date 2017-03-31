@@ -12,19 +12,20 @@ import SCLAlertView
 
 class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var TableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     var categories: [NSManagedObject] = []
     var collectionViewAlert: UICollectionView!
-    var newTaskName: String!
-    var newTaskColor: UIColor!
+    var newCategoryName: String!
+    var newCategoryColor: UIColor!
+    var editedColor: UIColor!
     var selectedCategoryRow: NSInteger!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TableView.delegate = self
-        TableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
 
     }
 
@@ -97,13 +98,14 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         subview.isUserInteractionEnabled = true
         
         alertView.customSubview = subview
-        alertView.addButton("Close", target: self, selector: #selector(chooseColorClosePressed))
+        alertView.addButton("Back", target: self, selector: #selector(chooseColorClosePressed))
         alertView.showEdit("Choose new color", subTitle: "This alert view has buttons")
         
     }
 
     func chooseColorClosePressed(_ sender:UIButton) {
-        TableView.reloadData()
+        self.categories[self.selectedCategoryRow].setValue(editedColor, forKey: "color")
+        tableView.reloadData()
     }
     
     @IBAction func addCategory(_ sender: Any) {
@@ -143,16 +145,27 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     func textFieldDidChange(textField: UITextField) {
-        self.newTaskName = textField.text
+        self.newCategoryName = textField.text
     }
     
     func AlertViewSubmitPressed(_ sender:UIButton) {
-        save(name: self.newTaskName, color: self.newTaskColor)
+        let managedContext = getContext()
+        
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Categories",
+                                       in: managedContext)!
+        
+        let category = NSManagedObject(entity: entity,
+                                       insertInto: managedContext)
+        category.setValue(self.newCategoryName, forKey: "name")
+        category.setValue(self.newCategoryColor, forKey: "color")
+        self.categories.append(category)
+        tableView.reloadData()
     }
 
     func AlertViewClosePressed(_ sender:UIButton) {
-        self.newTaskName = nil
-        self.newTaskColor = nil
+        self.newCategoryName = nil
+        self.newCategoryColor = nil
         self.selectedCategoryRow = nil
     }
     
@@ -177,7 +190,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         do {
             try managedContext.save()
             categories.append(category)
-            TableView.reloadData()
+            tableView.reloadData()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
@@ -187,7 +200,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.categories[index].setValue(color, forKey: "color")
         appDelegate.saveContext()
-        TableView.reloadData()
+        tableView.reloadData()
     }
     
     //Pomocna metoda na odstranenie vsetkych kategorii
@@ -205,7 +218,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         do {
             try moc.save()
             print("saved!")
-            TableView.reloadData()
+            tableView.reloadData()
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         } catch {
@@ -216,12 +229,16 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier != "save") {
-            print("cancel")
+            let managedContext = getContext()
+            managedContext.reset()
             return
         }
         else {
-            if let _  = self.newTaskColor {
-                 update(index: self.selectedCategoryRow, color: self.newTaskColor)
+            if let _  = self.editedColor {
+                update(index: self.selectedCategoryRow, color: self.editedColor)
+            }
+            if let _ = self.newCategoryName {
+                save(name: self.newCategoryName, color: self.newCategoryColor)
             }
         }
     }
@@ -239,16 +256,19 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             cell.backgroundColor = self.colors[indexPath.item].withAlphaComponent(0.2)
         }
         else if (collectionView.restorationIdentifier == "EditColorCollectionView") {
-            let color_tmp = self.colors[indexPath.item]
+            let color_tmp = self.colors[indexPath.item].withAlphaComponent(0.2)
             let categoryColor_tmp = self.categories[self.selectedCategoryRow].value(forKey: "color") as? UIColor
-            if color_tmp == categoryColor_tmp {
+
+            if (color_tmp == categoryColor_tmp?.withAlphaComponent(0.2)){
                 cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.borderWidth = 2.0
+                self.editedColor = color_tmp
             }
-            cell.backgroundColor = color_tmp.withAlphaComponent(0.2)
+            cell.backgroundColor = color_tmp
         }
         return cell
     }
+    
     
     // MARK: - UICollectionViewDelegate protocol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -258,10 +278,10 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         cell?.layer.borderWidth = 2.0
         
         if (collectionView.restorationIdentifier == "AlertCollectionView") {
-            self.newTaskColor = cell?.backgroundColor
+            self.newCategoryColor = cell?.backgroundColor
         }
         else if (collectionView.restorationIdentifier == "EditColorCollectionView") {
-            self.newTaskColor = cell?.backgroundColor
+            self.editedColor = cell?.backgroundColor
         }
         
     }
