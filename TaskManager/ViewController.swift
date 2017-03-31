@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     var newTaskToAdd: NewTask?
     var tasks: [NSManagedObject] = []
+    var selectedTask: NSManagedObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.reloadData()
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showSingleTask") {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let nav = segue.destination as! UINavigationController
+                let destinationVC = nav.topViewController as! ShowTaskVC
+                destinationVC.singleTask = tasks[indexPath.row]
+            }
+        }
+    }
     //MARK TableView methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,6 +91,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.isUserInteractionEnabled = true
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        self.selectedTask = tasks[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
