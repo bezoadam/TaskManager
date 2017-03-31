@@ -7,94 +7,166 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39026060F8710C1C78C0C8B3FE5DAEEF /* Pods-TaskManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 918485D0A5F654147BFB743568F19C80 /* Pods-TaskManager-dummy.m */; };
-		513AC75FC6C16A6F52971321E7337877 /* SCLAlertView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 780E9115DC64E18BDE0435285E9D4F4D /* SCLAlertView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5ABB6BC58A07864B3F9403216D4F4456 /* Pods-TaskManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BBCFCC9F45B4C5861F90EEC915EDF4 /* Pods-TaskManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6CA2365DFA312B272668A63954F3CAB8 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79976012D991BBCB570D7574B6552363 /* SCLExtensions.swift */; };
-		92A00D9580069396860FB420DC6D3DC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		B3C8BA443EFC5EBA61740BD70620E162 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7C12624AB36573B17A345B5C28FFE /* SCLAlertView.swift */; };
-		EB66BD3B3B99803B81D35D009E892B4D /* SCLAlertView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D826BF6AA60C0C13D9E2DD5CE5604CD4 /* SCLAlertView-dummy.m */; };
-		FDF3F57AF9C9525F9515D53E75AFCE0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		02CAE638EF1CEEBD6F5740498F9CA3F8 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70429A2618325297E9929DE9A38F55 /* DropDown.swift */; };
+		098F056D90AF9CD3FD60D8A81DF043B6 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46ED1797401BB0E8F3FFFF8AF1351F0 /* DropDownCell.swift */; };
+		1E5BDCC3B28523A0690BE85C409272FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		21A0E770BB66E861DF4A87CC6B4B7B12 /* Pods-TaskManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BBCFCC9F45B4C5861F90EEC915EDF4 /* Pods-TaskManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E7E74DF0C455B0BC43BFDD1D0163E64 /* DropDown-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E5137D1F9CD9F11C03725C43447601F1 /* DropDown-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37432F4CEB3F0CCBE0326261DB16AED7 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D463991EA60D40D83D26B8F533FE3D /* SCLExtensions.swift */; };
+		37C293AEA575D6E5186739D1B07805F2 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B656709BA5E0D8CBE20553A288E271EE /* DropDownCell.xib */; };
+		3E693A4E4BDD40DEE0141658717D544C /* SCLAlertView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C81448FC64BD946384232C5423F434 /* SCLAlertView-dummy.m */; };
+		442ADADA3215E1E5CA1557E708D4228C /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232E852A134A6F52D27DD77237A9583F /* DropDown+Appearance.swift */; };
+		9D0221E27E37CDA9DF26DD3CFA56D75B /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB010F8073922EBFEC82FAA73A158159 /* DPDKeyboardListener.swift */; };
+		9DAA4939B8EADFC46CD301E82D16D378 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		A401CF18D15DF246F40FAC4E8F06CBC7 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053A84C00E5E7738813EE3638434A8A0 /* DPDUIView+Extension.swift */; };
+		A5C5147E1A881A8D75E5CDDCC3091A65 /* Pods-TaskManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 918485D0A5F654147BFB743568F19C80 /* Pods-TaskManager-dummy.m */; };
+		A812E7811821F66B3B7499F6F1B513BA /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814C2A90A5E9EC185AA3B4839C377DAA /* DPDConstants.swift */; };
+		AC6581D9387744158B44BE683403C3BC /* DropDown-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE4E0DE2F1C7A231CAA566E7C2C0BA4 /* DropDown-dummy.m */; };
+		DC2EDB927CC88C80518A51A32934A87D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		EDBCCAA569246FCC561C6CE847FF34BD /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB6702C5BFD0FAD61940718F1424871 /* SCLAlertView.swift */; };
+		F252F2A1F577B4A0C82175822C74F53B /* SCLAlertView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D49A38BABFC4531379D252D583708CBD /* SCLAlertView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C09950D8F9402E98D160FB149F64FF97 /* PBXContainerItemProxy */ = {
+		3C21BF24AD3A5A12C7D8FFA558B3B026 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 59F56B1833A939A9E2ECFF6B11D3CA5C;
+			remoteGlobalIDString = FA47FA6C4CDC015AC9C7DF49981BB56F;
 			remoteInfo = SCLAlertView;
+		};
+		561A565BDA2221B0A0CE4795FEE7E380 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5168099F2EBFC99A707C03C9EADE01A5;
+			remoteInfo = DropDown;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0402990066A33023B18DC007B2F8A45E /* Pods_TaskManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TaskManager.framework; path = "Pods-TaskManager.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		053A84C00E5E7738813EE3638434A8A0 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DPDUIView+Extension.swift"; path = "DropDown/helpers/DPDUIView+Extension.swift"; sourceTree = "<group>"; };
 		0812DCC33110E7B84F98EAEBB8E53B59 /* Pods-TaskManager-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TaskManager-acknowledgements.markdown"; sourceTree = "<group>"; };
-		18DA4035587B16C18BA510E9CBEA4D51 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A915754953BDE3FBECB5447865A4567 /* SCLAlertView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SCLAlertView.xcconfig; sourceTree = "<group>"; };
-		4C0F39B7888AA01FB58B2C55432548CD /* Pods_TaskManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TaskManager.framework; path = "Pods-TaskManager.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		53D7C12624AB36573B17A345B5C28FFE /* SCLAlertView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = SCLAlertView/SCLAlertView.swift; sourceTree = "<group>"; };
+		097BF67D6319CA9F813BE67D36EC29F1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18F315D4A5399E22B49C193490DC0DB8 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DropDown.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		232E852A134A6F52D27DD77237A9583F /* DropDown+Appearance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DropDown+Appearance.swift"; path = "DropDown/src/DropDown+Appearance.swift"; sourceTree = "<group>"; };
+		25449F7FACE53F51FA48A5CEE3236E45 /* DropDown.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = DropDown.modulemap; sourceTree = "<group>"; };
+		2D322525395FB7D47E586E0FF8D4B3C0 /* SCLAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SCLAlertView.framework; path = SCLAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6227CB9FDF22B1DF86C7C9DB7E4A3AD8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		780E9115DC64E18BDE0435285E9D4F4D /* SCLAlertView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-umbrella.h"; sourceTree = "<group>"; };
-		79976012D991BBCB570D7574B6552363 /* SCLExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCLExtensions.swift; path = SCLAlertView/SCLExtensions.swift; sourceTree = "<group>"; };
+		690860336EAC87E035F83805BEC1BAC9 /* SCLAlertView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SCLAlertView.xcconfig; sourceTree = "<group>"; };
+		6EE4E0DE2F1C7A231CAA566E7C2C0BA4 /* DropDown-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DropDown-dummy.m"; sourceTree = "<group>"; };
 		79EFEAD5448517FDDAC69E05804A00BF /* Pods-TaskManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TaskManager.debug.xcconfig"; sourceTree = "<group>"; };
+		814C2A90A5E9EC185AA3B4839C377DAA /* DPDConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DPDConstants.swift; path = DropDown/helpers/DPDConstants.swift; sourceTree = "<group>"; };
 		8E5D7E58EEACDA0750723F575FF9AABB /* Pods-TaskManager-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TaskManager-resources.sh"; sourceTree = "<group>"; };
 		918485D0A5F654147BFB743568F19C80 /* Pods-TaskManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TaskManager-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A4D7A089AEE3FD4E8721E3F02C27B7EE /* Pods-TaskManager-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TaskManager-acknowledgements.plist"; sourceTree = "<group>"; };
 		A5B77772A9AEABB2633F99ED044AFE85 /* Pods-TaskManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TaskManager.release.xcconfig"; sourceTree = "<group>"; };
-		B5DB0EFA36B34E34B55F7EF520C76DB4 /* SCLAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SCLAlertView.framework; path = SCLAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A94B9C275496C6C63E3C0E97FA82B5D1 /* DropDown.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DropDown.xcconfig; sourceTree = "<group>"; };
+		A9E608E0F127BDB5BA4F5E06F5B2457F /* DropDown-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DropDown-prefix.pch"; sourceTree = "<group>"; };
+		B656709BA5E0D8CBE20553A288E271EE /* DropDownCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = DropDownCell.xib; path = DropDown/resources/DropDownCell.xib; sourceTree = "<group>"; };
 		BEE324A3DD96739E81D10A3BA175D01C /* Pods-TaskManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TaskManager.modulemap"; sourceTree = "<group>"; };
+		BF397F9968C1FD237ED0D336F6BEAB39 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0BB10CD6B043C0E4D9FB38364FFF8FE /* SCLAlertView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SCLAlertView.modulemap; sourceTree = "<group>"; };
+		C2C81448FC64BD946384232C5423F434 /* SCLAlertView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SCLAlertView-dummy.m"; sourceTree = "<group>"; };
+		C46ED1797401BB0E8F3FFFF8AF1351F0 /* DropDownCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropDownCell.swift; path = DropDown/src/DropDownCell.swift; sourceTree = "<group>"; };
 		C5BBCFCC9F45B4C5861F90EEC915EDF4 /* Pods-TaskManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TaskManager-umbrella.h"; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D826BF6AA60C0C13D9E2DD5CE5604CD4 /* SCLAlertView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SCLAlertView-dummy.m"; sourceTree = "<group>"; };
-		ED09B8D16E50B7F2DAED9CF350FEF481 /* SCLAlertView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SCLAlertView.modulemap; sourceTree = "<group>"; };
+		D49A38BABFC4531379D252D583708CBD /* SCLAlertView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-umbrella.h"; sourceTree = "<group>"; };
+		DB010F8073922EBFEC82FAA73A158159 /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DPDKeyboardListener.swift; path = DropDown/helpers/DPDKeyboardListener.swift; sourceTree = "<group>"; };
+		DF70429A2618325297E9929DE9A38F55 /* DropDown.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropDown.swift; path = DropDown/src/DropDown.swift; sourceTree = "<group>"; };
+		E5137D1F9CD9F11C03725C43447601F1 /* DropDown-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DropDown-umbrella.h"; sourceTree = "<group>"; };
+		EAB6702C5BFD0FAD61940718F1424871 /* SCLAlertView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = SCLAlertView/SCLAlertView.swift; sourceTree = "<group>"; };
+		F2D463991EA60D40D83D26B8F533FE3D /* SCLExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCLExtensions.swift; path = SCLAlertView/SCLExtensions.swift; sourceTree = "<group>"; };
 		F396563A7DC7D31BB8FAA5D2AA9FAF11 /* Pods-TaskManager-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TaskManager-frameworks.sh"; sourceTree = "<group>"; };
-		F7AF306D2AAF90D6D06E15543364D4C7 /* SCLAlertView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-prefix.pch"; sourceTree = "<group>"; };
+		FF03D96D89BA15438F7C9D2543FF3337 /* SCLAlertView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		009D9C4313575AA61D933A4CDB38E315 /* Frameworks */ = {
+		3FE28484C632D94C9779E4E74AE0BD29 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92A00D9580069396860FB420DC6D3DC5 /* Foundation.framework in Frameworks */,
+				9DAA4939B8EADFC46CD301E82D16D378 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCDD2AAD7716EB7D9BBC085F08345D17 /* Frameworks */ = {
+		6624396520743088CF8FFA445805355A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDF3F57AF9C9525F9515D53E75AFCE0E /* Foundation.framework in Frameworks */,
+				DC2EDB927CC88C80518A51A32934A87D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8430924809389D5105B00BCA7EF7E9A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E5BDCC3B28523A0690BE85C409272FD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21236440975E0D8924F5FBFD0C9D1478 /* SCLAlertView */ = {
+		168C9B56CF641F6A64887FB2219A93C2 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				53D7C12624AB36573B17A345B5C28FFE /* SCLAlertView.swift */,
-				79976012D991BBCB570D7574B6552363 /* SCLExtensions.swift */,
-				42753F0DBF438AAF17062729B2173DED /* Support Files */,
+				097BF67D6319CA9F813BE67D36EC29F1 /* Info.plist */,
+				C0BB10CD6B043C0E4D9FB38364FFF8FE /* SCLAlertView.modulemap */,
+				690860336EAC87E035F83805BEC1BAC9 /* SCLAlertView.xcconfig */,
+				C2C81448FC64BD946384232C5423F434 /* SCLAlertView-dummy.m */,
+				FF03D96D89BA15438F7C9D2543FF3337 /* SCLAlertView-prefix.pch */,
+				D49A38BABFC4531379D252D583708CBD /* SCLAlertView-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SCLAlertView";
+			sourceTree = "<group>";
+		};
+		369D29473CAEB700A650133CA1ECC47B /* SCLAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				EAB6702C5BFD0FAD61940718F1424871 /* SCLAlertView.swift */,
+				F2D463991EA60D40D83D26B8F533FE3D /* SCLExtensions.swift */,
+				168C9B56CF641F6A64887FB2219A93C2 /* Support Files */,
 			);
 			name = SCLAlertView;
 			path = SCLAlertView;
 			sourceTree = "<group>";
 		};
-		42753F0DBF438AAF17062729B2173DED /* Support Files */ = {
+		581AB83657F947D9D457740EF381719E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				18DA4035587B16C18BA510E9CBEA4D51 /* Info.plist */,
-				ED09B8D16E50B7F2DAED9CF350FEF481 /* SCLAlertView.modulemap */,
-				4A915754953BDE3FBECB5447865A4567 /* SCLAlertView.xcconfig */,
-				D826BF6AA60C0C13D9E2DD5CE5604CD4 /* SCLAlertView-dummy.m */,
-				F7AF306D2AAF90D6D06E15543364D4C7 /* SCLAlertView-prefix.pch */,
-				780E9115DC64E18BDE0435285E9D4F4D /* SCLAlertView-umbrella.h */,
+				25449F7FACE53F51FA48A5CEE3236E45 /* DropDown.modulemap */,
+				A94B9C275496C6C63E3C0E97FA82B5D1 /* DropDown.xcconfig */,
+				6EE4E0DE2F1C7A231CAA566E7C2C0BA4 /* DropDown-dummy.m */,
+				A9E608E0F127BDB5BA4F5E06F5B2457F /* DropDown-prefix.pch */,
+				E5137D1F9CD9F11C03725C43447601F1 /* DropDown-umbrella.h */,
+				BF397F9968C1FD237ED0D336F6BEAB39 /* Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SCLAlertView";
+			path = "../Target Support Files/DropDown";
+			sourceTree = "<group>";
+		};
+		5D06A1FF00C3DC79C6F8621F7EA84CD4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E430DE70CB3E6AAF02180C04E17EE9E8 /* DropDown */,
+				369D29473CAEB700A650133CA1ECC47B /* SCLAlertView */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6AB4D2FFA1A1F3C9EE712C5032375513 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18F315D4A5399E22B49C193490DC0DB8 /* DropDown.framework */,
+				0402990066A33023B18DC007B2F8A45E /* Pods_TaskManager.framework */,
+				2D322525395FB7D47E586E0FF8D4B3C0 /* SCLAlertView.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
@@ -110,19 +182,18 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				CE1D7C96A3A3C0CED68FBC36DB57C4C4 /* Pods */,
-				B16F235EF5B8288FC1B94A37CFF198A4 /* Products */,
+				5D06A1FF00C3DC79C6F8621F7EA84CD4 /* Pods */,
+				6AB4D2FFA1A1F3C9EE712C5032375513 /* Products */,
 				DB3667DCD4445F8FB1B3B0114D97754F /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		B16F235EF5B8288FC1B94A37CFF198A4 /* Products */ = {
+		8EAE5F9CB2EAF1F49074F0978783AACB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4C0F39B7888AA01FB58B2C55432548CD /* Pods_TaskManager.framework */,
-				B5DB0EFA36B34E34B55F7EF520C76DB4 /* SCLAlertView.framework */,
+				B656709BA5E0D8CBE20553A288E271EE /* DropDownCell.xib */,
 			);
-			name = Products;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -151,14 +222,6 @@
 			path = "Target Support Files/Pods-TaskManager";
 			sourceTree = "<group>";
 		};
-		CE1D7C96A3A3C0CED68FBC36DB57C4C4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				21236440975E0D8924F5FBFD0C9D1478 /* SCLAlertView */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		DB3667DCD4445F8FB1B3B0114D97754F /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,35 +230,96 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		E430DE70CB3E6AAF02180C04E17EE9E8 /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				814C2A90A5E9EC185AA3B4839C377DAA /* DPDConstants.swift */,
+				DB010F8073922EBFEC82FAA73A158159 /* DPDKeyboardListener.swift */,
+				053A84C00E5E7738813EE3638434A8A0 /* DPDUIView+Extension.swift */,
+				DF70429A2618325297E9929DE9A38F55 /* DropDown.swift */,
+				232E852A134A6F52D27DD77237A9583F /* DropDown+Appearance.swift */,
+				C46ED1797401BB0E8F3FFFF8AF1351F0 /* DropDownCell.swift */,
+				8EAE5F9CB2EAF1F49074F0978783AACB /* Resources */,
+				581AB83657F947D9D457740EF381719E /* Support Files */,
+			);
+			name = DropDown;
+			path = DropDown;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		57C3B4BB02BC8C81DAA5CDB3A3169F7F /* Headers */ = {
+		1904CD5E5CEA9226AFC355E19C3EB159 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ABB6BC58A07864B3F9403216D4F4456 /* Pods-TaskManager-umbrella.h in Headers */,
+				2E7E74DF0C455B0BC43BFDD1D0163E64 /* DropDown-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		663E84529382BCA653D7C9A50F8BEF84 /* Headers */ = {
+		3B6C64CB88645563B29916F589265681 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				513AC75FC6C16A6F52971321E7337877 /* SCLAlertView-umbrella.h in Headers */,
+				F252F2A1F577B4A0C82175822C74F53B /* SCLAlertView-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBCBB3DF48DA43BE4B4626BA9AC8E517 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A0E770BB66E861DF4A87CC6B4B7B12 /* Pods-TaskManager-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		59F56B1833A939A9E2ECFF6B11D3CA5C /* SCLAlertView */ = {
+		200B62A3DB6B22043A5F538F1397658E /* Pods-TaskManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04B947919177717D5287F5F37230A68E /* Build configuration list for PBXNativeTarget "SCLAlertView" */;
+			buildConfigurationList = 87CE8FF513C09CC1580B0A2A41175D98 /* Build configuration list for PBXNativeTarget "Pods-TaskManager" */;
 			buildPhases = (
-				8D9081EC00E5B2F689C3B545809999F3 /* Sources */,
-				009D9C4313575AA61D933A4CDB38E315 /* Frameworks */,
-				663E84529382BCA653D7C9A50F8BEF84 /* Headers */,
+				36602A4254EB64749A272C704759990C /* Sources */,
+				8430924809389D5105B00BCA7EF7E9A0 /* Frameworks */,
+				FBCBB3DF48DA43BE4B4626BA9AC8E517 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A845FFDCD73F6B6AC1916D44255609CE /* PBXTargetDependency */,
+				08D293229EF7D07E234807CE8BCEB086 /* PBXTargetDependency */,
+			);
+			name = "Pods-TaskManager";
+			productName = "Pods-TaskManager";
+			productReference = 0402990066A33023B18DC007B2F8A45E /* Pods_TaskManager.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45143614893062803984DA50AB90C1D5 /* Build configuration list for PBXNativeTarget "DropDown" */;
+			buildPhases = (
+				ED45CA897A4B81CB8204042001D7AEE8 /* Sources */,
+				3FE28484C632D94C9779E4E74AE0BD29 /* Frameworks */,
+				D7D924A57BC65B5D41E46B156A8DCF2B /* Resources */,
+				1904CD5E5CEA9226AFC355E19C3EB159 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DropDown;
+			productName = DropDown;
+			productReference = 18F315D4A5399E22B49C193490DC0DB8 /* DropDown.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FA47FA6C4CDC015AC9C7DF49981BB56F /* SCLAlertView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82C1BD481F1C1778094AE207CA80446A /* Build configuration list for PBXNativeTarget "SCLAlertView" */;
+			buildPhases = (
+				73B344B6FB22DB553C5E9D03607F144E /* Sources */,
+				6624396520743088CF8FFA445805355A /* Frameworks */,
+				3B6C64CB88645563B29916F589265681 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -203,25 +327,7 @@
 			);
 			name = SCLAlertView;
 			productName = SCLAlertView;
-			productReference = B5DB0EFA36B34E34B55F7EF520C76DB4 /* SCLAlertView.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		6B109723238B852341D089666DA05B23 /* Pods-TaskManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 237999211D746699497CA49AC1651ABD /* Build configuration list for PBXNativeTarget "Pods-TaskManager" */;
-			buildPhases = (
-				0821179AEAE525BA6F4F287040A6B39B /* Sources */,
-				DCDD2AAD7716EB7D9BBC085F08345D17 /* Frameworks */,
-				57C3B4BB02BC8C81DAA5CDB3A3169F7F /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				762EE7814D41FF25A9626A8E942B4612 /* PBXTargetDependency */,
-			);
-			name = "Pods-TaskManager";
-			productName = "Pods-TaskManager";
-			productReference = 4C0F39B7888AA01FB58B2C55432548CD /* Pods_TaskManager.framework */;
+			productReference = 2D322525395FB7D47E586E0FF8D4B3C0 /* SCLAlertView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -241,50 +347,115 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = B16F235EF5B8288FC1B94A37CFF198A4 /* Products */;
+			productRefGroup = 6AB4D2FFA1A1F3C9EE712C5032375513 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6B109723238B852341D089666DA05B23 /* Pods-TaskManager */,
-				59F56B1833A939A9E2ECFF6B11D3CA5C /* SCLAlertView */,
+				5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */,
+				200B62A3DB6B22043A5F538F1397658E /* Pods-TaskManager */,
+				FA47FA6C4CDC015AC9C7DF49981BB56F /* SCLAlertView */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		0821179AEAE525BA6F4F287040A6B39B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		D7D924A57BC65B5D41E46B156A8DCF2B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39026060F8710C1C78C0C8B3FE5DAEEF /* Pods-TaskManager-dummy.m in Sources */,
+				37C293AEA575D6E5186739D1B07805F2 /* DropDownCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8D9081EC00E5B2F689C3B545809999F3 /* Sources */ = {
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		36602A4254EB64749A272C704759990C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB66BD3B3B99803B81D35D009E892B4D /* SCLAlertView-dummy.m in Sources */,
-				B3C8BA443EFC5EBA61740BD70620E162 /* SCLAlertView.swift in Sources */,
-				6CA2365DFA312B272668A63954F3CAB8 /* SCLExtensions.swift in Sources */,
+				A5C5147E1A881A8D75E5CDDCC3091A65 /* Pods-TaskManager-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73B344B6FB22DB553C5E9D03607F144E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E693A4E4BDD40DEE0141658717D544C /* SCLAlertView-dummy.m in Sources */,
+				EDBCCAA569246FCC561C6CE847FF34BD /* SCLAlertView.swift in Sources */,
+				37432F4CEB3F0CCBE0326261DB16AED7 /* SCLExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED45CA897A4B81CB8204042001D7AEE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A812E7811821F66B3B7499F6F1B513BA /* DPDConstants.swift in Sources */,
+				9D0221E27E37CDA9DF26DD3CFA56D75B /* DPDKeyboardListener.swift in Sources */,
+				A401CF18D15DF246F40FAC4E8F06CBC7 /* DPDUIView+Extension.swift in Sources */,
+				442ADADA3215E1E5CA1557E708D4228C /* DropDown+Appearance.swift in Sources */,
+				AC6581D9387744158B44BE683403C3BC /* DropDown-dummy.m in Sources */,
+				02CAE638EF1CEEBD6F5740498F9CA3F8 /* DropDown.swift in Sources */,
+				098F056D90AF9CD3FD60D8A81DF043B6 /* DropDownCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		762EE7814D41FF25A9626A8E942B4612 /* PBXTargetDependency */ = {
+		08D293229EF7D07E234807CE8BCEB086 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SCLAlertView;
-			target = 59F56B1833A939A9E2ECFF6B11D3CA5C /* SCLAlertView */;
-			targetProxy = C09950D8F9402E98D160FB149F64FF97 /* PBXContainerItemProxy */;
+			target = FA47FA6C4CDC015AC9C7DF49981BB56F /* SCLAlertView */;
+			targetProxy = 3C21BF24AD3A5A12C7D8FFA558B3B026 /* PBXContainerItemProxy */;
+		};
+		A845FFDCD73F6B6AC1916D44255609CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DropDown;
+			target = 5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */;
+			targetProxy = 561A565BDA2221B0A0CE4795FEE7E380 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0E1FF4EF06FA0742B02910EECD3A2A59 /* Release */ = {
+		04ADDA48259B854054D5CA01F6EC9D67 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A915754953BDE3FBECB5447865A4567 /* SCLAlertView.xcconfig */;
+			baseConfigurationReference = A94B9C275496C6C63E3C0E97FA82B5D1 /* DropDown.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DropDown/DropDown-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DropDown/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DropDown/DropDown.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = DropDown;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0ACDC7864029AA8DC15ADB8BB519AD20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 690860336EAC87E035F83805BEC1BAC9 /* SCLAlertView.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -354,40 +525,39 @@
 			};
 			name = Release;
 		};
-		17F437206745B3FDE1A31F80A1BBC975 /* Debug */ = {
+		166E640816FD8016FF291BD935B20736 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A915754953BDE3FBECB5447865A4567 /* SCLAlertView.xcconfig */;
+			baseConfigurationReference = A94B9C275496C6C63E3C0E97FA82B5D1 /* DropDown.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SCLAlertView/SCLAlertView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SCLAlertView/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/DropDown/DropDown-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DropDown/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SCLAlertView/SCLAlertView.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SCLAlertView;
+				MODULEMAP_FILE = "Target Support Files/DropDown/DropDown.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = DropDown;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		618C416E567D444FCABEA97892CAAE05 /* Debug */ = {
+		5B5A7AC097D3D54A85D5239412077694 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79EFEAD5448517FDDAC69E05804A00BF /* Pods-TaskManager.debug.xcconfig */;
 			buildSettings = {
@@ -423,7 +593,40 @@
 			};
 			name = Debug;
 		};
-		BEC0764301D6641FBBAC20C2B70F20FC /* Release */ = {
+		7B9B9773043685A02436C7038083EA5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 690860336EAC87E035F83805BEC1BAC9 /* SCLAlertView.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SCLAlertView/SCLAlertView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCLAlertView/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SCLAlertView/SCLAlertView.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SCLAlertView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A3D3F156757956E9995EBC085336540A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5B77772A9AEABB2633F99ED044AFE85 /* Pods-TaskManager.release.xcconfig */;
 			buildSettings = {
@@ -505,29 +708,38 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		04B947919177717D5287F5F37230A68E /* Build configuration list for PBXNativeTarget "SCLAlertView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				17F437206745B3FDE1A31F80A1BBC975 /* Debug */,
-				0E1FF4EF06FA0742B02910EECD3A2A59 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		237999211D746699497CA49AC1651ABD /* Build configuration list for PBXNativeTarget "Pods-TaskManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				618C416E567D444FCABEA97892CAAE05 /* Debug */,
-				BEC0764301D6641FBBAC20C2B70F20FC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C382132BB6BF8CA1A911872A2062FD0D /* Debug */,
 				156284431C64CB05C59BDA0595A1E95A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45143614893062803984DA50AB90C1D5 /* Build configuration list for PBXNativeTarget "DropDown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04ADDA48259B854054D5CA01F6EC9D67 /* Debug */,
+				166E640816FD8016FF291BD935B20736 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82C1BD481F1C1778094AE207CA80446A /* Build configuration list for PBXNativeTarget "SCLAlertView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B9B9773043685A02436C7038083EA5E /* Debug */,
+				0ACDC7864029AA8DC15ADB8BB519AD20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87CE8FF513C09CC1580B0A2A41175D98 /* Build configuration list for PBXNativeTarget "Pods-TaskManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B5A7AC097D3D54A85D5239412077694 /* Debug */,
+				A3D3F156757956E9995EBC085336540A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

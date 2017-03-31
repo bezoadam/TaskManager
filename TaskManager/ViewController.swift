@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var newTaskToAdd: NewTask?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,7 +23,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
-        
+        if let _ = self.newTaskToAdd {
+            
+        }
     }
 
 }

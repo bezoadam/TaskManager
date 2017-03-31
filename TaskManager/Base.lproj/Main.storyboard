@@ -115,16 +115,21 @@
                     <navigationItem key="navigationItem" title="New Task" id="Aoa-lN-JFC">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xSt-f7-jDH">
                             <connections>
-                                <segue destination="kEf-Sl-1sv" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="rcw-mH-AJD"/>
+                                <segue destination="kEf-Sl-1sv" kind="unwind" identifier="unwindToMainVCCancel" unwindAction="unwindToMainVCWithSegue:" id="rcw-mH-AJD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="dWO-Wh-2Ex"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="dWO-Wh-2Ex">
+                            <connections>
+                                <segue destination="kEf-Sl-1sv" kind="unwind" identifier="unwindToMainVCSave" unwindAction="unwindToMainVCWithSegue:" id="2G0-Hn-QJT"/>
+                            </connections>
+                        </barButtonItem>
                         <connections>
                             <outlet property="titleView" destination="bKh-Kh-aLv" id="TJP-zj-ajI"/>
                         </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="cancelBar" destination="xSt-f7-jDH" id="XLe-fq-jpP"/>
+                        <outlet property="taskNameField" destination="Lvi-qf-FNQ" id="BTX-jD-qSs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZo-Tg-tFG" userLabel="First Responder" sceneMemberID="firstResponder"/>

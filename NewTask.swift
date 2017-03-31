@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class NewTask: NSManagedObject {
-    var tastkName: String!
+    var taskName: String!
     var finished: Bool!
     var endTime: String!
     var category: NSManagedObject!
