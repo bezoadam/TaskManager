@@ -19,6 +19,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(doubleTap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +33,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getData()
+    }
+    
+    func handleDoubleTap(recognizer: UIGestureRecognizer) {
+        let p = recognizer.location(in: tableView)
+        
+        let indexPath = tableView.indexPathForRow(at: p)
+        
+        if let _ = indexPath {
+            tableView.deselectRow(at: indexPath!, animated: true)
+            update(index: (indexPath?.row)!, isFinished: true)
+        }
+        
+        print ("doubke")
     }
     
     func getData() {
@@ -54,6 +71,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let _ = self.newTaskToAdd {
             getData()
         }
+        tableView.reloadData()
+    }
+    
+    func update(index: NSInteger, isFinished: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.tasks[index].setValue(isFinished, forKey: "isFinished")
+        appDelegate.saveContext()
         tableView.reloadData()
     }
     
@@ -88,12 +112,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let category = name.value(forKey: "category") as? NSManagedObject
         let bgColor = category?.value(forKey: "color") as? UIColor
         cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
+        
+        let isFinished = name.value(forKey: "isFinished") as? Bool
+        
+        if isFinished == true {
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryType.none
+        }
         cell.isUserInteractionEnabled = true
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         self.selectedTask = tasks[indexPath.row]
     }
