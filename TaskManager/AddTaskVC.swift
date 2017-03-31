@@ -15,13 +15,17 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     
     @IBOutlet weak var categoryPicker: UIPickerView!
     
+    @IBOutlet weak var endDateField: UITextField!
+    
     @IBOutlet weak var taskNameField: UITextField!
 
     var categories: [NSManagedObject] = []
+    var selectedCategory: NSManagedObject!
+    let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        createDatePicker()
         // Do any additional setup after loading the view.
     }
     
@@ -51,6 +55,27 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         return appDelegate.persistentContainer.viewContext
     }
     
+    func createDatePicker() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneButton], animated: false)
+        
+        endDateField.inputAccessoryView = toolbar
+        endDateField.inputView = datePicker
+        
+    }
+    
+    func donePressed() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        endDateField.text = dateFormatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier != "unwindToMainVCSave") {
             print("cancel")
@@ -60,6 +85,7 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
             let newTasktoAdd = NewTask()
             newTasktoAdd.taskName = self.taskNameField.text!
             newTasktoAdd.finished = false
+            newTasktoAdd.category = self.selectedCategory
             let destinationVC = segue.destination as! ViewController
             destinationVC.newTaskToAdd = newTasktoAdd
         }
@@ -80,5 +106,9 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return categories.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.selectedCategory = categories[row]
     }
 }

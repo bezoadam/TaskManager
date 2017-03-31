@@ -85,20 +85,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="BlC-V3-nNT">
-                                <rect key="frame" x="0.0" y="334" width="320" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="512574804.85588503">
-                                    <!--2017-03-30 13:53:24 +0000-->
-                                </date>
-                            </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsP-Yl-FmJ">
-                                <rect key="frame" x="41" y="305" width="68" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOY-ja-z4j">
-                                <rect key="frame" x="0.0" y="188" width="375" height="109"/>
+                                <rect key="frame" x="28" y="188" width="320" height="109"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="109" id="yeN-Vp-eAj"/>
                                 </constraints>
@@ -107,24 +95,28 @@
                                     <outlet property="delegate" destination="7sV-bK-xn3" id="PkP-om-pTG"/>
                                 </connections>
                             </pickerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tap to add end date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kk6-M8-1xb">
+                                <rect key="frame" x="41" y="317" width="293" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ntz-yt-caE" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="1TN-fX-O1I"/>
                             <constraint firstItem="Ntz-yt-caE" firstAttribute="top" secondItem="Lvi-qf-FNQ" secondAttribute="bottom" constant="25" id="3ct-GF-AIG"/>
-                            <constraint firstItem="BlC-V3-nNT" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leading" id="3me-bY-Fdo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lvi-qf-FNQ" secondAttribute="trailing" constant="25" id="Bjg-f6-ay4"/>
-                            <constraint firstItem="rsP-Yl-FmJ" firstAttribute="top" secondItem="bKh-Kh-aLv" secondAttribute="top" constant="305" id="CxT-HK-xdi"/>
                             <constraint firstItem="Lvi-qf-FNQ" firstAttribute="centerX" secondItem="bKh-Kh-aLv" secondAttribute="centerX" id="HCa-Va-Ney"/>
                             <constraint firstItem="bOY-ja-z4j" firstAttribute="centerX" secondItem="Lvi-qf-FNQ" secondAttribute="centerX" id="INM-sj-dZf"/>
                             <constraint firstItem="cRx-Qo-2rJ" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="KDy-Ps-nLV"/>
-                            <constraint firstItem="bOY-ja-z4j" firstAttribute="leading" secondItem="BlC-V3-nNT" secondAttribute="leading" id="Mbf-Ir-gbq"/>
-                            <constraint firstItem="rsP-Yl-FmJ" firstAttribute="top" secondItem="bOY-ja-z4j" secondAttribute="bottom" constant="8" symbolic="YES" id="NTg-yJ-QaC"/>
-                            <constraint firstItem="rsP-Yl-FmJ" firstAttribute="leading" secondItem="Ntz-yt-caE" secondAttribute="leading" id="Y9D-sw-fph"/>
+                            <constraint firstItem="Kk6-M8-1xb" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="QDI-Vn-Of7"/>
                             <constraint firstItem="Lvi-qf-FNQ" firstAttribute="top" secondItem="rGG-px-qeX" secondAttribute="bottom" constant="50" id="gWK-Zg-Xgr"/>
                             <constraint firstItem="Lvi-qf-FNQ" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="jXu-cW-zDz"/>
-                            <constraint firstItem="BlC-V3-nNT" firstAttribute="top" secondItem="rsP-Yl-FmJ" secondAttribute="bottom" constant="8" symbolic="YES" id="shA-6H-nVc"/>
+                            <constraint firstItem="Kk6-M8-1xb" firstAttribute="top" secondItem="bOY-ja-z4j" secondAttribute="bottom" constant="20" id="oF6-6W-JlE"/>
+                            <constraint firstItem="d1F-mX-Nna" firstAttribute="top" secondItem="Kk6-M8-1xb" secondAttribute="bottom" constant="320" id="pQ7-Qi-8Kj"/>
                             <constraint firstItem="cRx-Qo-2rJ" firstAttribute="top" secondItem="rGG-px-qeX" secondAttribute="bottom" constant="25" id="vBM-qX-0Dd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kk6-M8-1xb" secondAttribute="trailing" constant="25" id="wPM-Zz-bCP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="Aoa-lN-JFC">
@@ -145,6 +137,7 @@
                     <connections>
                         <outlet property="cancelBar" destination="xSt-f7-jDH" id="XLe-fq-jpP"/>
                         <outlet property="categoryPicker" destination="bOY-ja-z4j" id="fvI-JO-c8c"/>
+                        <outlet property="endDateField" destination="Kk6-M8-1xb" id="re2-8o-FbJ"/>
                         <outlet property="taskNameField" destination="Lvi-qf-FNQ" id="BTX-jD-qSs"/>
                     </connections>
                 </viewController>

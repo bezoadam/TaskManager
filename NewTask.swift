@@ -12,6 +12,6 @@ import CoreData
 class NewTask: NSManagedObject {
     var taskName: String!
     var finished: Bool!
-    var endTime: String!
+    var endTime: NSDate!
     var category: NSManagedObject!
 }
