@@ -82,5 +82,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let moc = appDelegate.persistentContainer.viewContext
+            
+            moc.delete(self.tasks[indexPath.row])
+            appDelegate.saveContext()
+
+            self.tasks.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
 }
 
