@@ -12,12 +12,13 @@ import SCLAlertView
 
 class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var categoryName: UITextField!
-    
     @IBOutlet weak var TableView: UITableView!
     
     var categories: [NSManagedObject] = []
     var collectionViewAlert: UICollectionView!
+    var newTaskName: String!
+    var newTaskColor: UIColor!
+    var selectedCategoryRow: NSInteger!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,73 +66,107 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             tableView.dequeueReusableCell(withIdentifier: "TableCell",
                                           for: indexPath)
         cell.textLabel?.text = name.value(forKeyPath: "name") as? String
-        cell.backgroundColor = name.value(forKey: "color") as? UIColor
-        cell.isUserInteractionEnabled = false
+        cell.textLabel?.backgroundColor = UIColor.clear
+        let bgColor = name.value(forKey: "color") as? UIColor
+        cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
+        cell.isUserInteractionEnabled = true
 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.selectedCategoryRow = indexPath.row
+        let alertView = SCLAlertView()
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.itemSize = CGSize(width: 25, height: 25)
+        
+        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 30), collectionViewLayout: layout)
+        collectionViewAlert.dataSource = self
+        collectionViewAlert.delegate = self
+        collectionViewAlert.restorationIdentifier = "EditColorCollectionView"
+        collectionViewAlert.isUserInteractionEnabled = true
+        collectionViewAlert.allowsMultipleSelection = false
+        collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
+        collectionViewAlert.backgroundColor = UIColor.white
+        
+        
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:60))
+        subview.addSubview(self.collectionViewAlert)
+        subview.isUserInteractionEnabled = true
+        
+        alertView.customSubview = subview
+        alertView.addButton("Close", target: self, selector: #selector(AlertViewClosePressed))
+        alertView.addButton("Save", target: self, selector: #selector(AlertViewSavePressed))
+        alertView.showEdit("Choose new color", subTitle: "This alert view has buttons")
+        
+    }
+    
+    func AlertViewSavePressed(_ sender:UIButton) {
+        update(index: self.selectedCategoryRow, color: self.newTaskColor)
+    }
+    
     @IBAction func addCategory(_ sender: Any) {
         let alertView = SCLAlertView()
-        alertView.addTextField("Enter category name")
+        
 
         // Do any additional setup after loading the view, typically from a nib.
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         layout.itemSize = CGSize(width: 25, height: 25)
         
-        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 25), collectionViewLayout: layout)
+        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 30), collectionViewLayout: layout)
         collectionViewAlert.dataSource = self
         collectionViewAlert.delegate = self
         collectionViewAlert.restorationIdentifier = "AlertCollectionView"
         collectionViewAlert.isUserInteractionEnabled = true
+        collectionViewAlert.allowsMultipleSelection = false
         collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
         collectionViewAlert.backgroundColor = UIColor.white
         
-        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:70))
+        // Add textfield 1
+        let textfield = UITextField(frame: CGRect(x: 7, y: 50, width: 202, height: 27))
+        textfield.layer.borderColor = UIColor.black.cgColor
+        textfield.layer.borderWidth = 1.0
+        textfield.layer.cornerRadius = 5
+        textfield.addTarget(self, action: #selector(textFieldDidChange), for: UIControlEvents.editingChanged)
+        textfield.placeholder = "Enter category name"
+        textfield.textAlignment = NSTextAlignment.center
+        
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:80))
         subview.addSubview(self.collectionViewAlert)
         subview.isUserInteractionEnabled = true
+        subview.addSubview(textfield)
         
         alertView.customSubview = subview
+        alertView.addButton("Close", target: self, selector: #selector(AlertViewClosePressed))
+        alertView.addButton("Submit", target: self, selector: #selector(AlertViewSubmitPressed))
         alertView.showEdit("Choose color", subTitle: "This alert view has buttons")
-        
-//        alert.view.addSubview(self.collectionViewAlert)
-
-        
-//        let alert2 = UIAlertController(title: "New category",
-//                                      message: "Add a new category name",
-//                                      preferredStyle: .alert)
-//        
-//        let saveAction = UIAlertAction(title: "Save", style: .default) {
-//            [unowned self] action in
-//            
-//            guard let textField = alert.textFields?.first,
-//                let categoryToSave =  textField.text else {
-//                    return
-//            }
-//            
-//            self.save(name: categoryToSave)
-//            self.TableView.reloadData()
-//        }
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel",
-//                                         style: .default)
-//        
-//        alert.addTextField()
-//        
-//        alert.addAction(saveAction)
-//        alert.addAction(cancelAction)
-        
-//        present(alert, animated: true)
-
 
     }
+    
+    func textFieldDidChange(textField: UITextField) {
+        self.newTaskName = textField.text
+    }
+    
+    func AlertViewSubmitPressed(_ sender:UIButton) {
+        save(name: self.newTaskName, color: self.newTaskColor)
+    }
 
+    func AlertViewClosePressed(_ sender:UIButton) {
+        self.newTaskName = nil
+        self.newTaskColor = nil
+        self.selectedCategoryRow = nil
+    }
+    
     @IBAction func deleteAll(_ sender: Any) {
         deleteRecords()
     }
     
-    func save(name: String) {
+    func save(name: String, color: UIColor) {
         
         let managedContext = getContext()
         
@@ -145,17 +180,25 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         
         // 3
         category.setValue(name, forKeyPath: "name")
-        category.setValue(UIColor.red, forKey: "color")
+        category.setValue(color, forKey: "color")
         
         // 4
         do {
             try managedContext.save()
             categories.append(category)
+            TableView.reloadData()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
-
+    
+    func update(index: NSInteger, color: UIColor) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.categories[index].setValue(color, forKey: "color")
+        appDelegate.saveContext()
+        TableView.reloadData()
+    }
+    
     func deleteRecords() -> Void {
         let moc = getContext()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Categories")
@@ -191,28 +234,34 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // get a reference to our storyboard cell
-        if (collectionView.restorationIdentifier == "AlertCollectionView") {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollCell", for: indexPath as IndexPath)
-            cell.backgroundColor = self.colors[indexPath.item]
-            return cell
-        }
-        else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath)
-            
-            cell.backgroundColor = self.colors[indexPath.item]// make cell more visible in our example project
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollCell", for: indexPath as IndexPath)
         
+        cell.backgroundColor = self.colors[indexPath.item]
+        return cell
+
     }
     
     // MARK: - UICollectionViewDelegate protocol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderColor = UIColor.black.cgColor
+        cell?.layer.borderWidth = 2.0
+        
+        if (collectionView.restorationIdentifier == "AlertCollectionView") {
+            self.newTaskColor = cell?.backgroundColor
+        }
+        else if (collectionView.restorationIdentifier == "EditColorCollectionView") {
+            self.newTaskColor = cell?.backgroundColor
+        }
+        
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 0.0
+    }
     // MARK: - UICollectionViewDataSource protocol
     
 

@@ -181,7 +181,7 @@ open class SCLAlertView: UIViewController {
             self.kTextFont = kTextFont
             self.kButtonFont = kButtonFont
             
-            self.showCloseButton = showCloseButton
+            self.showCloseButton = false
             self.showCircularIcon = showCircularIcon
             self.shouldAutoDismiss = shouldAutoDismiss
             self.contentViewCornerRadius = contentViewCornerRadius
