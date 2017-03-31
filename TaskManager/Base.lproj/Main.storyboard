@@ -74,41 +74,56 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRx-Qo-2rJ">
-                                <rect key="frame" x="41" y="89" width="82.5" height="21"/>
+                                <rect key="frame" x="41" y="89" width="83" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntz-yt-caE">
-                                <rect key="frame" x="41" y="169" width="70.5" height="21"/>
+                                <rect key="frame" x="41" y="169" width="71" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="BlC-V3-nNT">
-                                <rect key="frame" x="0.0" y="334" width="375" height="216"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="BlC-V3-nNT">
+                                <rect key="frame" x="0.0" y="334" width="320" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="512574804.85588503">
                                     <!--2017-03-30 13:53:24 +0000-->
                                 </date>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsP-Yl-FmJ">
-                                <rect key="frame" x="41" y="305" width="83" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsP-Yl-FmJ">
+                                <rect key="frame" x="41" y="305" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOY-ja-z4j">
+                                <rect key="frame" x="0.0" y="188" width="375" height="109"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="109" id="yeN-Vp-eAj"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="7sV-bK-xn3" id="ocE-Uc-b1w"/>
+                                    <outlet property="delegate" destination="7sV-bK-xn3" id="PkP-om-pTG"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ntz-yt-caE" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="1TN-fX-O1I"/>
                             <constraint firstItem="Ntz-yt-caE" firstAttribute="top" secondItem="Lvi-qf-FNQ" secondAttribute="bottom" constant="25" id="3ct-GF-AIG"/>
+                            <constraint firstItem="BlC-V3-nNT" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leading" id="3me-bY-Fdo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lvi-qf-FNQ" secondAttribute="trailing" constant="25" id="Bjg-f6-ay4"/>
+                            <constraint firstItem="rsP-Yl-FmJ" firstAttribute="top" secondItem="bKh-Kh-aLv" secondAttribute="top" constant="305" id="CxT-HK-xdi"/>
                             <constraint firstItem="Lvi-qf-FNQ" firstAttribute="centerX" secondItem="bKh-Kh-aLv" secondAttribute="centerX" id="HCa-Va-Ney"/>
+                            <constraint firstItem="bOY-ja-z4j" firstAttribute="centerX" secondItem="Lvi-qf-FNQ" secondAttribute="centerX" id="INM-sj-dZf"/>
                             <constraint firstItem="cRx-Qo-2rJ" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="KDy-Ps-nLV"/>
+                            <constraint firstItem="bOY-ja-z4j" firstAttribute="leading" secondItem="BlC-V3-nNT" secondAttribute="leading" id="Mbf-Ir-gbq"/>
+                            <constraint firstItem="rsP-Yl-FmJ" firstAttribute="top" secondItem="bOY-ja-z4j" secondAttribute="bottom" constant="8" symbolic="YES" id="NTg-yJ-QaC"/>
+                            <constraint firstItem="rsP-Yl-FmJ" firstAttribute="leading" secondItem="Ntz-yt-caE" secondAttribute="leading" id="Y9D-sw-fph"/>
                             <constraint firstItem="Lvi-qf-FNQ" firstAttribute="top" secondItem="rGG-px-qeX" secondAttribute="bottom" constant="50" id="gWK-Zg-Xgr"/>
                             <constraint firstItem="Lvi-qf-FNQ" firstAttribute="leading" secondItem="bKh-Kh-aLv" secondAttribute="leadingMargin" constant="25" id="jXu-cW-zDz"/>
+                            <constraint firstItem="BlC-V3-nNT" firstAttribute="top" secondItem="rsP-Yl-FmJ" secondAttribute="bottom" constant="8" symbolic="YES" id="shA-6H-nVc"/>
                             <constraint firstItem="cRx-Qo-2rJ" firstAttribute="top" secondItem="rGG-px-qeX" secondAttribute="bottom" constant="25" id="vBM-qX-0Dd"/>
                         </constraints>
                     </view>
@@ -129,6 +144,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cancelBar" destination="xSt-f7-jDH" id="XLe-fq-jpP"/>
+                        <outlet property="categoryPicker" destination="bOY-ja-z4j" id="fvI-JO-c8c"/>
                         <outlet property="taskNameField" destination="Lvi-qf-FNQ" id="BTX-jD-qSs"/>
                     </connections>
                 </viewController>

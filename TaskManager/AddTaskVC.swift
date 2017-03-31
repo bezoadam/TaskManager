@@ -9,23 +9,47 @@
 import UIKit
 import CoreData
 
-class AddTaskVC: UIViewController {
+class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var cancelBar: UIBarButtonItem!
     
+    @IBOutlet weak var categoryPicker: UIPickerView!
+    
     @IBOutlet weak var taskNameField: UITextField!
 
+    var categories: [NSManagedObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //nacitanie ulozenych kategorii
+        let managedContext = getContext()
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Categories")
+        
+        do {
+            categories = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func getContext () -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier != "unwindToMainVCSave") {
@@ -41,4 +65,20 @@ class AddTaskVC: UIViewController {
         }
     }
 
+    //Pickerview DataSource methods
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let category = self.categories[row]
+        let row = category.value(forKey: "name") as? String
+        let color = category.value(forKey: "color") as? UIColor
+        return NSAttributedString(string: row!, attributes: [NSForegroundColorAttributeName: color!])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
 }
