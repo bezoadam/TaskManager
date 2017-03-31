@@ -382,7 +382,11 @@
                                 <segue destination="jH8-RG-B6S" kind="unwind" identifier="cancel" unwindAction="unwindToMainVCWithSegue:" id="lnG-CS-kDL"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="4Fg-hg-5X2"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="4Fg-hg-5X2">
+                            <connections>
+                                <segue destination="jH8-RG-B6S" kind="unwind" identifier="save" unwindAction="unwindToMainVCWithSegue:" id="GO0-3F-rl2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="categoryName" destination="H1e-k6-nnh" id="hab-JI-vJc"/>

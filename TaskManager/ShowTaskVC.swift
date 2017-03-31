@@ -36,7 +36,7 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
             NSFetchRequest<NSManagedObject>(entityName: "Categories")
         
         do {
-            categories = try managedContext.fetch(fetchRequest)
+            self.categories = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -44,6 +44,10 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         createDatePicker()
         
         self.taskName.text = self.singleTask?.value(forKey: "name") as? String
+        
+        let category = self.singleTask?.value(forKey: "category")
+        let rowIndex = self.categories.index(of: category as! NSManagedObject)
+        self.categoryName.selectRow(rowIndex!, inComponent: 0, animated: false)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -93,6 +97,13 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         dateFormatter.timeStyle = .short
         endDate.text = dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier != "save") {
+            print("cancel")
+            return
+        }
     }
     
     //MARK PickerView methods

@@ -49,6 +49,9 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        //defaultne prva kategoria
+        self.selectedCategory = categories[0]
     }
     
     func getContext () -> NSManagedObjectContext {
