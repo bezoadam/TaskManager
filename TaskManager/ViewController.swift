@@ -64,10 +64,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let name = self.tasks[indexPath.row]
-        let cell =
-            tableView.dequeueReusableCell(withIdentifier: "TableCell",
-                                          for: indexPath)
-        cell.textLabel?.text = name.value(forKeyPath: "name") as? String
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") as! CustomTaskCell
+        cell.taskName.text = name.value(forKey: "name") as? String
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        let date = name.value(forKey: "endDate") as? Date
+        cell.taskDate.text = dateFormatter.string(from: date!)
         cell.textLabel?.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
         let category = name.value(forKey: "category") as? NSManagedObject
