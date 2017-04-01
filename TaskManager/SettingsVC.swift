@@ -165,6 +165,15 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     func AlertViewSubmitPressed(_ sender:UIButton) {
+        
+        if self.newCategoryName == nil ||
+            self.newCategoryColor == nil{
+            let alertError = SCLAlertView()
+            alertError.addButton("OK", target:self, selector:#selector(okButton))
+            alertError.showError("Error", subTitle: "You need to enter name of task and select end date")
+            return
+        }
+        
         let managedContext = getContext()
         
         let entity =
@@ -183,6 +192,10 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         self.newCategoryName = nil
         self.newCategoryColor = nil
         self.selectedCategoryRow = nil
+    }
+    
+    func okButton() {
+        
     }
     
     @IBAction func deleteAll(_ sender: Any) {
