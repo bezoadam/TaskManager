@@ -9,11 +9,14 @@
 import UIKit
 import CoreData
 import SCLAlertView
+import DLRadioButton
 
 class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var categories: [NSManagedObject] = []
     var collectionViewAlert: UICollectionView!
@@ -28,7 +31,15 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         
         tableView.delegate = self
         tableView.dataSource = self
-
+        
+        if let _ = self.orderBy {
+            if self.orderBy == "orderByName" {
+                self.nameLabel.textColor = UIColor.blue
+            }
+            else {
+                self.dateLabel.textColor = UIColor.blue
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

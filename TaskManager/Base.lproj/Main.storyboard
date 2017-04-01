@@ -313,7 +313,7 @@
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
-                                        <color key="value" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.0" green="0.59059631824493408" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -360,6 +360,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="TableView" destination="dEb-c4-47D" id="Cia-ds-P7S"/>
+                        <outlet property="dateLabel" destination="hiW-UI-AJ5" id="gK1-9f-dDa"/>
+                        <outlet property="nameLabel" destination="qP7-Wi-Vie" id="i9F-ja-dFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXK-sh-ILC" userLabel="First Responder" sceneMemberID="firstResponder"/>
