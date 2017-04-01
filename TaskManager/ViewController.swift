@@ -113,8 +113,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
         if let _ = self.newTaskToAdd {
             getData()
-            tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
     func update(index: NSInteger, isFinished: Bool) {

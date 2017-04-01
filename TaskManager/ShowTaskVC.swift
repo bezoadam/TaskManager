@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SCLAlertView
+import UserNotifications
 
 class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -18,6 +19,7 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var newEndDate: Date?
     let datePicker = UIDatePicker()
     var isFinishedState: Bool?
+    var isNotification: Bool?
     
     @IBOutlet weak var categoryName: UIPickerView!
     @IBOutlet weak var taskName: UITextField!
@@ -69,6 +71,7 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
             self.isFinishedState = false
         }
         
+        notificationSwitch.addTarget(self, action: #selector(notificationSwitchChanged), for: UIControlEvents.valueChanged)
         doneSwitch.addTarget(self, action: #selector(switchChanged), for: UIControlEvents.valueChanged)
     }
     
@@ -115,6 +118,15 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         else {
             self.isFinishedState = false
+        }
+    }
+    
+    func notificationSwitchChanged() {
+        if notificationSwitch.isOn {
+            self.isNotification = true
+        }
+        else {
+            self.isNotification = false
         }
     }
     
@@ -171,6 +183,32 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             self.singleTask?.setValue(self.isFinishedState, forKey: "isFinished")
             appDelegate.saveContext()
+        }
+        
+        //notifikacia
+        if self.isNotification == true{
+            scheduleNotification(at: self.datePicker.date)
+        }
+    }
+
+    func scheduleNotification(at date: Date) {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents(in: .current, from: date)
+        let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Task Manager"
+        content.body = self.taskName.text!
+        content.sound = UNNotificationSound.default()
+        
+        let request = UNNotificationRequest(identifier: "taskNotification", content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) {(error) in
+            if let error = error {
+                print("Error: \(error)")
+            }
         }
     }
     

@@ -222,7 +222,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ub0-A5-R9p">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ub0-A5-R9p">
                                 <rect key="frame" x="285" y="437" width="51" height="31"/>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBp-y7-go2">
@@ -419,7 +419,7 @@
                                 <rect key="frame" x="272" y="372" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iKW-Md-uO0">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iKW-Md-uO0">
                                 <rect key="frame" x="272" y="424" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
@@ -468,7 +468,7 @@
                         <outlet property="categoryName" destination="H1e-k6-nnh" id="hab-JI-vJc"/>
                         <outlet property="doneSwitch" destination="v6F-Eq-Uqn" id="a3x-kz-qYG"/>
                         <outlet property="endDate" destination="1UG-gf-BOI" id="nbe-MK-ZSk"/>
-                        <outlet property="notificationSwitch" destination="iKW-Md-uO0" id="l4a-iW-AWa"/>
+                        <outlet property="notificationSwitch" destination="iKW-Md-uO0" id="CQ7-b6-P1f"/>
                         <outlet property="taskName" destination="EK9-aZ-m7T" id="o8l-Hy-rqj"/>
                     </connections>
                 </viewController>
