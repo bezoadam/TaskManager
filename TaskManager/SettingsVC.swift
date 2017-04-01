@@ -257,9 +257,9 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             if let _  = self.editedColor {
                 update(index: self.selectedCategoryRow, color: self.editedColor)
             }
-            if let _ = self.newCategoryName {
-                save(name: self.newCategoryName, color: self.newCategoryColor)
-            }
+//            if let _ = self.newCategoryName {
+//                save(name: self.newCategoryName, color: self.newCategoryColor)
+//            }
             if let _ = self.orderBy {
                 let nav = segue.destination 
                 let destinationVC = nav as! ViewController

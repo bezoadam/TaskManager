@@ -32,7 +32,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.addGestureRecognizer(singleTap)
         view.addGestureRecognizer(doubleTap)
         
-        isAppAlreadyLaunchedOnce()
+        if isAppAlreadyLaunchedOnce() == false {
+            let managedContext = getContext()
+            
+            let entity =
+                NSEntityDescription.entity(forEntityName: "Categories",
+                                           in: managedContext)!
+            
+            
+            let initCategory = ["Category 1", "Category 2", "Category 3", "Category 4"]
+            let initColors = [UIColor.red.withAlphaComponent(0.2), UIColor.yellow.withAlphaComponent(0.2), UIColor.green.withAlphaComponent(0.2), UIColor.blue.withAlphaComponent(0.2)]
+            
+            for (index, element) in initCategory.enumerated() {
+                
+                let category = NSManagedObject(entity: entity,
+                                               insertInto: managedContext)
+                category.setValue(element, forKeyPath: "name")
+                category.setValue(initColors[index], forKey: "color")
+                
+                do {
+                    try managedContext.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
