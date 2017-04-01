@@ -61,7 +61,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let _ = indexPath {
             tableView.deselectRow(at: indexPath!, animated: true)
-            update(index: (indexPath?.row)!, isFinished: true)
+            let isFinished_tmp = self.tasks[(indexPath?.row)!].value(forKey: "isFinished") as? Bool
+            if isFinished_tmp == true {
+                update(index: (indexPath?.row)!, isFinished: false)
+            }
+            else {
+                update(index: (indexPath?.row)!, isFinished: true)
+            }
         }
     }
     

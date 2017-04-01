@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SCLAlertView
 
 class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -105,27 +106,46 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         }
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "unwindToMainVCSave" {
+            if ((self.taskNameField.text?.characters.count)! > 0 &&
+                (self.endDateField.text?.characters.count)! > 0) {
+                return true
+            }
+            else {
+                let alertError = SCLAlertView()
+                alertError.addButton("OK", target:self, selector:#selector(AddTaskVC.okButton))
+                alertError.showError("Error", subTitle: "You need to enter name of task and select end date")
+                
+                return false
+            }
+        }
+        return true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier != "unwindToMainVCSave") {
             print("cancel")
             return
         }
-        if ((self.taskNameField.text?.characters.count)! > 0 &&
-            (self.endDateField.text?.characters.count)! > 0) {
-            
-            save(name: self.taskNameField.text!, isFinished: false, category: self.selectedCategory, endDate: self.endDate)
-            
-            let newTasktoAdd = NewTask()
-            newTasktoAdd.taskName = self.taskNameField.text!
-            newTasktoAdd.isFinished = false
-            newTasktoAdd.category = self.selectedCategory
-            newTasktoAdd.endDate = self.endDate
-            let destinationVC = segue.destination as! ViewController
-            destinationVC.newTaskToAdd = newTasktoAdd
-        }
+        save(name: self.taskNameField.text!, isFinished: false, category: self.selectedCategory, endDate: self.endDate)
+        
+        let newTasktoAdd = NewTask()
+        newTasktoAdd.taskName = self.taskNameField.text!
+        newTasktoAdd.isFinished = false
+        newTasktoAdd.category = self.selectedCategory
+        newTasktoAdd.endDate = self.endDate
+        let destinationVC = segue.destination as! ViewController
+        destinationVC.newTaskToAdd = newTasktoAdd
     }
 
+    func okButton() {
+        
+    }
     //Pickerview DataSource methods
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

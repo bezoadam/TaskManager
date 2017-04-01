@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SCLAlertView
 
 class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -16,6 +17,7 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var newSelectedCategory: NSManagedObject?
     var newEndDate: Date?
     let datePicker = UIDatePicker()
+    var isFinishedState: Bool?
     
     @IBOutlet weak var categoryName: UIPickerView!
     @IBOutlet weak var taskName: UITextField!
@@ -60,10 +62,14 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         let isFinished_tmp = self.singleTask?.value(forKey: "isFinished") as? Bool
         if isFinished_tmp == true {
             doneSwitch.setOn(true, animated: true)
+            self.isFinishedState = true
         }
         else {
             doneSwitch.setOn(false, animated: true)
+            self.isFinishedState = false
         }
+        
+        doneSwitch.addTarget(self, action: #selector(switchChanged), for: UIControlEvents.valueChanged)
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,11 +105,79 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.view.endEditing(true)
     }
     
+    func okButton() {
+        
+    }
+    
+    func switchChanged() {
+        if doneSwitch.isOn {
+            self.isFinishedState = true
+        }
+        else {
+            self.isFinishedState = false
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "save" {
+            if self.taskName.text?.characters.count == 0 {
+                let alertError = SCLAlertView()
+                alertError.addButton("OK", target:self, selector:#selector(okButton))
+                alertError.showError("Error", subTitle: "You need to enter name of task and select end date")
+                
+                return false
+            }
+        }
+        return true
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier != "save") {
-            print("cancel")
             return
         }
+        
+        let originalTaskName = self.singleTask?.value(forKey: "name") as? String
+        let newTaskName = self.taskName.text
+        
+        if originalTaskName != newTaskName {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            self.singleTask?.setValue(newTaskName, forKey: "name")
+            appDelegate.saveContext()
+        }
+        
+        let category = self.singleTask?.value(forKey: "category")
+        let rowIndex = self.categories.index(of: category as! NSManagedObject)
+        let actualIndex = self.categoryName.selectedRow(inComponent: 0)
+        if actualIndex != rowIndex {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            self.singleTask?.setValue(self.categories[actualIndex], forKey: "category")
+            appDelegate.saveContext()
+        }
+        
+        let date_tmp = self.singleTask?.value(forKey: "endDate") as? Date        
+        
+        if self.datePicker.date != date_tmp {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            self.singleTask?.setValue(self.datePicker.date, forKey: "endDate")
+            appDelegate.saveContext()
+        }
+
+        let isFinished_tmp = self.singleTask?.value(forKey: "isFinished") as? Bool
+        
+        if self.isFinishedState != isFinished_tmp {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            self.singleTask?.setValue(self.isFinishedState, forKey: "isFinished")
+            appDelegate.saveContext()
+        }
+    }
+    
+    func updateTaskName(index: NSInteger, color: UIColor) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.categories[index].setValue(color, forKey: "color")
+        appDelegate.saveContext()
     }
     
     //MARK PickerView methods
