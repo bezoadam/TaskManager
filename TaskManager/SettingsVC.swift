@@ -21,6 +21,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     var newCategoryColor: UIColor!
     var editedColor: UIColor!
     var selectedCategoryRow: NSInteger!
+    var orderBy: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,15 +246,21 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             if let _ = self.newCategoryName {
                 save(name: self.newCategoryName, color: self.newCategoryColor)
             }
+            if let _ = self.orderBy {
+                let nav = segue.destination 
+                let destinationVC = nav as! ViewController
+                destinationVC.orderBy = self.orderBy
+            }
+            
         }
     }
     
     @IBAction func orderByName(_ sender: Any) {
-        print ("order bty name")
+        self.orderBy = "orderByName"
     }
     
     @IBAction func orderByDate(_ sender: Any) {
-        print ("order by date")
+        self.orderBy = "orderByDate"
     }
     
     

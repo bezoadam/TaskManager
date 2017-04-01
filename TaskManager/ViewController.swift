@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var newTaskToAdd: NewTask?
     var tasks: [NSManagedObject] = []
     var selectedTask: NSManagedObject?
+    var orderBy: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +94,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
         if let _ = self.newTaskToAdd {
             getData()
+        }
+        if let _ = self.orderBy {
+            if self.orderBy == "orderByName" {
+                
+            }
+            else {
+                
+            }
         }
         tableView.reloadData()
     }
