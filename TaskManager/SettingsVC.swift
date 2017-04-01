@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import SCLAlertView
 import DLRadioButton
+import UserNotifications
 
 class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -17,6 +18,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var notificationsSwitch: UISwitch!
     
     var categories: [NSManagedObject] = []
     var collectionViewAlert: UICollectionView!
@@ -56,6 +58,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -261,6 +264,9 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
                 let nav = segue.destination 
                 let destinationVC = nav as! ViewController
                 destinationVC.orderBy = self.orderBy
+            }
+            if self.notificationsSwitch.isOn == true {
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             }
             
         }

@@ -31,6 +31,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         singleTap.require(toFail: doubleTap)
         view.addGestureRecognizer(singleTap)
         view.addGestureRecognizer(doubleTap)
+        
+        isAppAlreadyLaunchedOnce()
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,6 +124,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tasks[index].setValue(isFinished, forKey: "isFinished")
         appDelegate.saveContext()
         tableView.reloadData()
+    }
+    
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        
+        if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
+            print("App already launched")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

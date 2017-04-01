@@ -362,6 +362,7 @@
                         <outlet property="TableView" destination="dEb-c4-47D" id="Cia-ds-P7S"/>
                         <outlet property="dateLabel" destination="hiW-UI-AJ5" id="gK1-9f-dDa"/>
                         <outlet property="nameLabel" destination="qP7-Wi-Vie" id="i9F-ja-dFs"/>
+                        <outlet property="notificationsSwitch" destination="ub0-A5-R9p" id="SJT-AG-ru6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXK-sh-ILC" userLabel="First Responder" sceneMemberID="firstResponder"/>
