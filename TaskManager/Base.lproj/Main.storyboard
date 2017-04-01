@@ -53,7 +53,6 @@
                                         <connections>
                                             <outlet property="taskDate" destination="121-4b-lLk" id="qUh-38-eGI"/>
                                             <outlet property="taskName" destination="NhE-OK-MEE" id="ZMs-QM-0p3"/>
-                                            <segue destination="TTa-nq-M8w" kind="show" identifier="showSingleTask" id="My6-ug-wM9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -87,6 +86,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ZGc-gq-gH7" id="rwA-FA-cNP"/>
+                        <segue destination="TTa-nq-M8w" kind="show" identifier="showTask" id="NQg-rl-UbH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

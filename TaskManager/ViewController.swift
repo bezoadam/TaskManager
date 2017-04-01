@@ -20,8 +20,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap))
+        singleTap.numberOfTapsRequired = 1
+
+        
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
         doubleTap.numberOfTapsRequired = 2
+        
+        singleTap.require(toFail: doubleTap)
+        view.addGestureRecognizer(singleTap)
         view.addGestureRecognizer(doubleTap)
     }
 
@@ -34,6 +41,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewWillAppear(animated)
         getData()
     }
+
+    func handleSingleTap(recognizer: UIGestureRecognizer) {
+        let p = recognizer.location(in: tableView)
+        
+        let indexPath = tableView.indexPathForRow(at: p)
+        
+        if let _ = indexPath {
+            tableView.deselectRow(at: indexPath!, animated: true)
+            self.selectedTask = tasks[(indexPath?.row)!]
+            self.performSegue(withIdentifier: "showTask", sender: self)
+        }
+    }
     
     func handleDoubleTap(recognizer: UIGestureRecognizer) {
         let p = recognizer.location(in: tableView)
@@ -44,8 +63,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.deselectRow(at: indexPath!, animated: true)
             update(index: (indexPath?.row)!, isFinished: true)
         }
-        
-        print ("doubke")
     }
     
     func getData() {
@@ -82,12 +99,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showSingleTask") {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let nav = segue.destination as! UINavigationController
-                let destinationVC = nav.topViewController as! ShowTaskVC
-                destinationVC.singleTask = tasks[indexPath.row]
-            }
+        if (segue.identifier == "showTask") {
+            let nav = segue.destination as! UINavigationController
+            let destinationVC = nav.topViewController as! ShowTaskVC
+            destinationVC.singleTask = self.selectedTask
         }
     }
     //MARK TableView methods
@@ -126,11 +141,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        self.selectedTask = tasks[indexPath.row]
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+//        self.selectedTask = tasks[indexPath.row]
+//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
