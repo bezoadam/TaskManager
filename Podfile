@@ -7,6 +7,6 @@ target 'TaskManager' do
 
   # Pods for TaskManager
   pod 'SCLAlertView'
-  pod 'DropDown'
+  pod 'DLRadioButton'
   
 end

@@ -13,6 +13,7 @@ import SCLAlertView
 class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+
     
     var categories: [NSManagedObject] = []
     var collectionViewAlert: UICollectionView!
@@ -246,6 +247,15 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             }
         }
     }
+    
+    @IBAction func orderByName(_ sender: Any) {
+        print ("order bty name")
+    }
+    
+    @IBAction func orderByDate(_ sender: Any) {
+        print ("order by date")
+    }
+    
     
     var colors = [UIColor.red, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.cyan]
     

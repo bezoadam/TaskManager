@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "DLRadioButton.h"
 
-FOUNDATION_EXPORT double DropDownVersionNumber;
-FOUNDATION_EXPORT const unsigned char DropDownVersionString[];
+FOUNDATION_EXPORT double DLRadioButtonVersionNumber;
+FOUNDATION_EXPORT const unsigned char DLRadioButtonVersionString[];
 
