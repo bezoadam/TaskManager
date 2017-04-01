@@ -41,6 +41,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getData()
+        
+        if let _ = self.orderBy {
+            if self.orderBy == "orderByName" {
+                let sortedResults = self.tasks.sorted(by: ({
+                    let tmp1 = $0.value(forKey: "name") as! String
+                    let tmp2 = $1.value(forKey: "name") as! String
+                    return tmp1 < tmp2
+                }))
+                self.tasks = sortedResults
+            }
+            else {
+                self.tasks = self.tasks.sorted(by: ({
+                    let tmp1 = $0.value(forKey: "endDate") as! Date
+                    let tmp2 = $1.value(forKey: "endDate") as! Date
+                    return tmp1 < tmp2
+                }))
+            }
+            tableView.reloadData()
+        }
     }
 
     func handleSingleTap(recognizer: UIGestureRecognizer) {
@@ -94,16 +113,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
         if let _ = self.newTaskToAdd {
             getData()
+            tableView.reloadData()
         }
-        if let _ = self.orderBy {
-            if self.orderBy == "orderByName" {
-                
-            }
-            else {
-                
-            }
-        }
-        tableView.reloadData()
     }
     
     func update(index: NSInteger, isFinished: Bool) {
@@ -118,6 +129,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let nav = segue.destination as! UINavigationController
             let destinationVC = nav.topViewController as! ShowTaskVC
             destinationVC.singleTask = self.selectedTask
+        }
+        else if (segue.identifier == "showSettings") {
+            let nav = segue.destination as! UINavigationController
+            let destinationVC = nav.topViewController as! SettingsVC
+            destinationVC.orderBy = self.orderBy
         }
     }
     //MARK TableView methods
