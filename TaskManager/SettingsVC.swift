@@ -311,6 +311,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
             let categoryColor_tmp = self.categories[self.selectedCategoryRow].value(forKey: "color") as? UIColor
 
             if (color_tmp == categoryColor_tmp?.withAlphaComponent(0.2)){
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
                 cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.borderWidth = 2.0
                 self.editedColor = color_tmp
