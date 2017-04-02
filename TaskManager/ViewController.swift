@@ -12,6 +12,7 @@ import CoreData
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    
     var newTaskToAdd: NewTask?
     var tasks: [NSManagedObject] = []
     var selectedTask: NSManagedObject?
@@ -19,7 +20,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap))
         singleTap.numberOfTapsRequired = 1
@@ -32,13 +32,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.addGestureRecognizer(singleTap)
         view.addGestureRecognizer(doubleTap)
         
+        
+        ///Pridanie defaultnych kategorii
         if isAppAlreadyLaunchedOnce() == false {
             let managedContext = getContext()
             
             let entity =
                 NSEntityDescription.entity(forEntityName: "Categories",
                                            in: managedContext)!
-            
             
             let initCategory = ["Category 1", "Category 2", "Category 3", "Category 4"]
             let initColors = [UIColor.red.withAlphaComponent(0.2), UIColor.yellow.withAlphaComponent(0.2), UIColor.green.withAlphaComponent(0.2), UIColor.blue.withAlphaComponent(0.2)]
@@ -57,6 +58,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
+        
+        ///posunitie zaciatku riadku v tableView
+        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = UIEdgeInsets.zero
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,6 +122,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func getContext () -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
     func getData() {
         //nacitanie ulozenych taskov
         let managedContext = getContext()
@@ -131,9 +141,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func getContext () -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
+    ///Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showTask") {
+            let nav = segue.destination as! UINavigationController
+            let destinationVC = nav.topViewController as! ShowTaskVC
+            destinationVC.singleTask = self.selectedTask
+        }
+        else if (segue.identifier == "showSettings") {
+            let nav = segue.destination as! UINavigationController
+            let destinationVC = nav.topViewController as! SettingsVC
+            destinationVC.orderBy = self.orderBy
+        }
     }
     
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
@@ -154,28 +173,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let defaults = UserDefaults.standard
         
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
-            print("App already launched")
             return true
         }else{
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
-            print("App launched first time")
             return false
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showTask") {
-            let nav = segue.destination as! UINavigationController
-            let destinationVC = nav.topViewController as! ShowTaskVC
-            destinationVC.singleTask = self.selectedTask
-        }
-        else if (segue.identifier == "showSettings") {
-            let nav = segue.destination as! UINavigationController
-            let destinationVC = nav.topViewController as! SettingsVC
-            destinationVC.orderBy = self.orderBy
-        }
-    }
-    //MARK TableView methods
+    /// TableView methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tasks.count
@@ -207,15 +212,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.accessoryType = UITableViewCellAccessoryType.none
         }
         cell.isUserInteractionEnabled = true
+        cell.layoutMargins = UIEdgeInsets.zero
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-//        self.selectedTask = tasks[indexPath.row]
-//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
