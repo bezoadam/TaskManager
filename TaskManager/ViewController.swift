@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
-    var newTaskToAdd: NewTask?
+    var newTaskAdded: Bool?
     var tasks: [NSManagedObject] = []
     var selectedTask: NSManagedObject?
     var orderBy: String!
@@ -156,7 +156,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
-        if let _ = self.newTaskToAdd {
+        if self.newTaskAdded == true{
             getData()
         }
         tableView.reloadData()

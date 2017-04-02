@@ -29,7 +29,6 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +76,6 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func getContext () -> NSManagedObjectContext {
@@ -85,6 +83,58 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         return appDelegate.persistentContainer.viewContext
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "save" {
+            if self.taskName.text?.characters.count == 0 {
+                let alertError = SCLAlertView()
+                alertError.addButton("OK", target:self, selector:#selector(okButton))
+                alertError.showError("Error", subTitle: "You need to enter name of task and select end date")
+                
+                return false
+            }
+        }
+        return true
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier != "save") {
+            return
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let originalTaskName = self.singleTask?.value(forKey: "name") as? String
+        let newTaskName = self.taskName.text
+        
+        if originalTaskName != newTaskName {
+            self.singleTask?.setValue(newTaskName, forKey: "name")
+        }
+        
+        let category = self.singleTask?.value(forKey: "category")
+        let rowIndex = self.categories.index(of: category as! NSManagedObject)
+        let actualIndex = self.categoryName.selectedRow(inComponent: 0)
+        if actualIndex != rowIndex {
+            self.singleTask?.setValue(self.categories[actualIndex], forKey: "category")
+        }
+        
+        let date_tmp = self.singleTask?.value(forKey: "endDate") as? Date
+        
+        if self.datePicker.date != date_tmp {
+            self.singleTask?.setValue(self.datePicker.date, forKey: "endDate")
+        }
+        
+        let isFinished_tmp = self.singleTask?.value(forKey: "isFinished") as? Bool
+        
+        if self.isFinishedState != isFinished_tmp {
+            self.singleTask?.setValue(self.isFinishedState, forKey: "isFinished")
+        }
+        
+        //notifikacia
+        if self.isNotification == true{
+            scheduleNotification(at: self.datePicker.date)
+        }
+        
+        appDelegate.saveContext()
+    }
     func createDatePicker() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -132,63 +182,6 @@ class ShowTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "save" {
-            if self.taskName.text?.characters.count == 0 {
-                let alertError = SCLAlertView()
-                alertError.addButton("OK", target:self, selector:#selector(okButton))
-                alertError.showError("Error", subTitle: "You need to enter name of task and select end date")
-                
-                return false
-            }
-        }
-        return true
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier != "save") {
-            return
-        }
-        
-        let originalTaskName = self.singleTask?.value(forKey: "name") as? String
-        let newTaskName = self.taskName.text
-        
-        if originalTaskName != newTaskName {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.singleTask?.setValue(newTaskName, forKey: "name")
-            appDelegate.saveContext()
-        }
-        
-        let category = self.singleTask?.value(forKey: "category")
-        let rowIndex = self.categories.index(of: category as! NSManagedObject)
-        let actualIndex = self.categoryName.selectedRow(inComponent: 0)
-        if actualIndex != rowIndex {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.singleTask?.setValue(self.categories[actualIndex], forKey: "category")
-            appDelegate.saveContext()
-        }
-        
-        let date_tmp = self.singleTask?.value(forKey: "endDate") as? Date        
-        
-        if self.datePicker.date != date_tmp {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.singleTask?.setValue(self.datePicker.date, forKey: "endDate")
-            appDelegate.saveContext()
-        }
-
-        let isFinished_tmp = self.singleTask?.value(forKey: "isFinished") as? Bool
-        
-        if self.isFinishedState != isFinished_tmp {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.singleTask?.setValue(self.isFinishedState, forKey: "isFinished")
-            appDelegate.saveContext()
-        }
-        
-        //notifikacia
-        if self.isNotification == true{
-            scheduleNotification(at: self.datePicker.date)
-        }
     }
 
     func scheduleNotification(at date: Date) {

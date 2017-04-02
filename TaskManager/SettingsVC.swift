@@ -17,7 +17,9 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var dateLabel: UILabel!
+    
     @IBOutlet weak var notificationsSwitch: UISwitch!
     
     var categories: [NSManagedObject] = []
@@ -63,7 +65,6 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func getContext () -> NSManagedObjectContext {
@@ -71,52 +72,26 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         return appDelegate.persistentContainer.viewContext
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.categories.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let name = self.categories[indexPath.row]
-        let cell =
-            tableView.dequeueReusableCell(withIdentifier: "TableCell",
-                                          for: indexPath)
-        cell.textLabel?.text = name.value(forKeyPath: "name") as? String
-        cell.textLabel?.backgroundColor = UIColor.clear
-        cell.selectionStyle = .none
-        let bgColor = name.value(forKey: "color") as? UIColor
-        cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
-        cell.isUserInteractionEnabled = true
-
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        self.selectedCategoryRow = indexPath.row
-        let alertView = SCLAlertView()
-        
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-        layout.itemSize = CGSize(width: 25, height: 25)
-        
-        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 30), collectionViewLayout: layout)
-        collectionViewAlert.dataSource = self
-        collectionViewAlert.delegate = self
-        collectionViewAlert.restorationIdentifier = "EditColorCollectionView"
-        collectionViewAlert.isUserInteractionEnabled = true
-        collectionViewAlert.allowsMultipleSelection = false
-        collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
-        collectionViewAlert.backgroundColor = UIColor.white
-        
-        
-        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:60))
-        subview.addSubview(self.collectionViewAlert)
-        subview.isUserInteractionEnabled = true
-        
-        alertView.customSubview = subview
-        alertView.addButton("Back", target: self, selector: #selector(chooseColorClosePressed))
-        alertView.showEdit("Choose new color", subTitle: "This alert view has buttons")
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier != "save") {
+            let managedContext = getContext()
+            managedContext.reset()
+            return
+        }
+        else {
+            if let _  = self.editedColor {
+                update(index: self.selectedCategoryRow, color: self.editedColor)
+            }
+            if let _ = self.orderBy {
+                let nav = segue.destination
+                let destinationVC = nav as! ViewController
+                destinationVC.orderBy = self.orderBy
+            }
+            if self.notificationsSwitch.isOn == true {
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            }
+            
+        }
     }
 
     func chooseColorClosePressed(_ sender:UIButton) {
@@ -260,31 +235,6 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         self.view.endEditing(true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier != "save") {
-            let managedContext = getContext()
-            managedContext.reset()
-            return
-        }
-        else {
-            if let _  = self.editedColor {
-                update(index: self.selectedCategoryRow, color: self.editedColor)
-            }
-//            if let _ = self.newCategoryName {
-//                save(name: self.newCategoryName, color: self.newCategoryColor)
-//            }
-            if let _ = self.orderBy {
-                let nav = segue.destination 
-                let destinationVC = nav as! ViewController
-                destinationVC.orderBy = self.orderBy
-            }
-            if self.notificationsSwitch.isOn == true {
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-            }
-            
-        }
-    }
-    
     @IBAction func orderByName(_ sender: Any) {
         self.orderBy = "orderByName"
     }
@@ -296,7 +246,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
     
     var colors = [UIColor.red, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.cyan]
     
-    // MARK: - UICollectionViewDataSource protocol
+    ///CollectionView methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.colors.count
     }
@@ -320,11 +270,8 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         }
         return cell
     }
-    
-    
-    // MARK: - UICollectionViewDelegate protocol
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.layer.borderColor = UIColor.black.cgColor
         cell?.layer.borderWidth = 2.0
@@ -343,4 +290,53 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         cell?.layer.borderWidth = 0.0
     }
 
+    
+    ///TableView methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let name = self.categories[indexPath.row]
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: "TableCell",
+                                          for: indexPath)
+        cell.textLabel?.text = name.value(forKeyPath: "name") as? String
+        cell.textLabel?.backgroundColor = UIColor.clear
+        cell.selectionStyle = .none
+        let bgColor = name.value(forKey: "color") as? UIColor
+        cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
+        cell.isUserInteractionEnabled = true
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.selectedCategoryRow = indexPath.row
+        let alertView = SCLAlertView()
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.itemSize = CGSize(width: 25, height: 25)
+        
+        collectionViewAlert = UICollectionView(frame: CGRect(x: 18, y: 10, width: 250, height: 30), collectionViewLayout: layout)
+        collectionViewAlert.dataSource = self
+        collectionViewAlert.delegate = self
+        collectionViewAlert.restorationIdentifier = "EditColorCollectionView"
+        collectionViewAlert.isUserInteractionEnabled = true
+        collectionViewAlert.allowsMultipleSelection = false
+        collectionViewAlert.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollCell")
+        collectionViewAlert.backgroundColor = UIColor.white
+        
+        
+        let subview = UIView(frame: CGRect(x:0,y:0,width:216,height:60))
+        subview.addSubview(self.collectionViewAlert)
+        subview.isUserInteractionEnabled = true
+        
+        alertView.customSubview = subview
+        alertView.addButton("Back", target: self, selector: #selector(chooseColorClosePressed))
+        alertView.showEdit("Choose new color", subTitle: "This alert view has buttons")
+        
+    }
 }
