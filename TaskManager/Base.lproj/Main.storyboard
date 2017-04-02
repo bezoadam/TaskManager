@@ -31,24 +31,33 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sBH-XP-bP0" id="Hbs-Ai-0dN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="taskName" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhE-OK-MEE">
-                                                    <rect key="frame" x="8" y="8" width="359" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="taskName" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhE-OK-MEE">
+                                                    <rect key="frame" x="8" y="11.5" width="359" height="26.5"/>
+                                                    <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="taskDate" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="121-4b-lLk">
-                                                    <rect key="frame" x="8" y="45" width="180" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="taskDate" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="121-4b-lLk">
+                                                    <rect key="frame" x="8" y="46" width="180" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="180" id="aw3-7a-2Lo"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="lz7-gc-xNF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="GillSans-LightItalic" family="Gill Sans" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NhE-OK-MEE" firstAttribute="leading" secondItem="Hbs-Ai-0dN" secondAttribute="leadingMargin" id="3pf-Q5-nFt"/>
+                                                <constraint firstItem="121-4b-lLk" firstAttribute="top" secondItem="NhE-OK-MEE" secondAttribute="bottom" constant="8" id="Abu-Sd-lYD"/>
+                                                <constraint firstItem="121-4b-lLk" firstAttribute="leading" secondItem="NhE-OK-MEE" secondAttribute="leading" id="PqP-4Z-vn8"/>
+                                                <constraint firstItem="NhE-OK-MEE" firstAttribute="trailing" secondItem="Hbs-Ai-0dN" secondAttribute="trailingMargin" id="v7y-IW-qZG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="121-4b-lLk" secondAttribute="bottom" constant="10.5" id="yXr-m7-buf"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="taskDate" destination="121-4b-lLk" id="qUh-38-eGI"/>
@@ -77,7 +86,7 @@
                                     <segue destination="2Fd-85-IUC" kind="show" identifier="addNewTask" id="vY1-uZ-RKS"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Settings" id="3KF-VH-upJ">
+                            <barButtonItem image="settingsIcon.png" id="3KF-VH-upJ">
                                 <connections>
                                     <segue destination="AgS-Dg-DGI" kind="show" identifier="showSettings" id="09Q-T0-dHO"/>
                                 </connections>
@@ -551,4 +560,7 @@
             <point key="canvasLocation" x="1841" y="1152"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settingsIcon.png" width="25" height="25"/>
+    </resources>
 </document>
