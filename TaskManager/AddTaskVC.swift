@@ -151,7 +151,7 @@ class AddTaskVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         let category = self.categories[row]
         let row = category.value(forKey: "name") as? String
         let color = category.value(forKey: "color") as? UIColor
-        return NSAttributedString(string: row!, attributes: [NSForegroundColorAttributeName: color!])
+        return NSAttributedString(string: row!, attributes: [NSForegroundColorAttributeName: color?.withAlphaComponent(0.7)])
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

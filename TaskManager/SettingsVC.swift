@@ -44,6 +44,9 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
                 self.dateLabel.textColor = UIColor.blue
             }
         }
+        ///posunitie zaciatku riadku v tableView
+        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = UIEdgeInsets.zero
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -307,7 +310,7 @@ class SettingsVC: UIViewController, UICollectionViewDataSource, UICollectionView
         let bgColor = name.value(forKey: "color") as? UIColor
         cell.backgroundColor = bgColor?.withAlphaComponent(0.2)
         cell.isUserInteractionEnabled = true
-        
+        cell.layoutMargins = UIEdgeInsets.zero
         return cell
     }
     
