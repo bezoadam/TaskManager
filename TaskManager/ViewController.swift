@@ -153,6 +153,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let destinationVC = nav.topViewController as! SettingsVC
             destinationVC.orderBy = self.orderBy
         }
+        else if (segue.identifier == "addNewTask") {
+            let nav = segue.destination as! UINavigationController
+            let _ = nav.topViewController as! AddTaskVC
+        }
     }
     
     @IBAction func unwindToMainVC(segue: UIStoryboardSegue){
